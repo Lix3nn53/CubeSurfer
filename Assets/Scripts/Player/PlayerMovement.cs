@@ -7,24 +7,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speedForward;
     [SerializeField] private float speedSideways;
 
+    private new Rigidbody rigidbody;
+    
     // PLAYER INPUTS
     private float movementInput;
 
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void FixedUpdate()
+	{
         float sideWaysVelocity = movementInput * speedSideways * Time.deltaTime;
         float forwardVelocity =  speedForward * Time.deltaTime;
 
-        this.transform.Translate(sideWaysVelocity, 0, forwardVelocity);
-    }
+        rigidbody.velocity = new Vector3(-forwardVelocity, 0, sideWaysVelocity);
+	}
+
 
     public void OnMovement(float movement) {
 			this.movementInput = movement;

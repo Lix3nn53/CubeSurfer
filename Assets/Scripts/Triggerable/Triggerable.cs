@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+public class Triggerable : MonoBehaviour
 {
     
     public virtual void OnTriggerEnter(Collider other) {
-        this.OnCollect(other);
+        this.OnTrigger(other);
     }
 
-    public virtual void OnCollect(Collider other) {
+    public virtual void OnTrigger(Collider other) {
 
     }
 }

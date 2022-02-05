@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : Collectable
+public class Cube : Triggerable
 {
 
-    public override void OnCollect(Collider other) {
-        Debug.Log("AAAAAAAAAA");
+    public override void OnTrigger(Collider other) {
         var go = other.gameObject;
         if (go == null || !other.gameObject.CompareTag("Player"))
             return;
 
         CubeCollector.Instance.OnCollect(this.gameObject);
+        Destroy(this); // Removes this script instance from the game object
     }
 }
