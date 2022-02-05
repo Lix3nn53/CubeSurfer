@@ -27,21 +27,21 @@ public class CubeCollector : MonoBehaviour
     }
 
     public void OnCollect(GameObject cube) {
-        int cubeCount = cubes.Count;
+        int cubeCount = this.cubes.Count;
 
         // Container Height
-        float containerY = graphicsContainer.transform.position.y + this.heightPerCube + distanceBetweenCubes;
-        graphicsContainer.transform.position = new Vector3(graphicsContainer.transform.position.x, containerY, graphicsContainer.transform.position.z);
+        float containerY = this.graphicsContainer.transform.position.y + this.heightPerCube + this.distanceBetweenCubes;
+        this.graphicsContainer.transform.position = new Vector3(this.graphicsContainer.transform.position.x, containerY, this.graphicsContainer.transform.position.z);
 
         // Add New Cube To Container
-        cube.transform.parent = cubeContainer.gameObject.transform;
-        float localY = -cubeCount - (distanceBetweenCubes * cubeCount);
+        cube.transform.parent = this.cubeContainer.gameObject.transform;
+        float localY = -cubeCount - (this.distanceBetweenCubes * cubeCount);
         cube.transform.localPosition = new Vector3(0, localY, 0);
-        cubes.Add(cube);
+        this.cubes.Add(cube);
 
         // PlayerGraphics Height
-        float playerGraphicsY = playerGraphics.transform.localPosition.y + jumpOnCollect;
-        playerGraphics.transform.localPosition = new Vector3(playerGraphics.transform.localPosition.x, playerGraphicsY, playerGraphics.transform.localPosition.z);
+        float playerGraphicsY = this.playerGraphics.transform.localPosition.y + this.jumpOnCollect;
+        this.playerGraphics.transform.localPosition = new Vector3(this.playerGraphics.transform.localPosition.x, playerGraphicsY, this.playerGraphics.transform.localPosition.z);
         
         // Player player = go.GetComponent<Player>();
 
@@ -53,11 +53,11 @@ public class CubeCollector : MonoBehaviour
         Debug.Log("START: " + start);
         Debug.Log("height: " + height);
 
-        int lastIndex = cubes.Count - 1;
+        int lastIndex = this.cubes.Count - 1;
         for (int i = start; i < start + height; i++) {
-            cubes[lastIndex - i].transform.parent = null;
-            Debug.Log(cubes[lastIndex - i].name);
-            cubes.RemoveAt(lastIndex - i);
+            this.cubes[lastIndex - i].transform.parent = null;
+            Debug.Log(this.cubes[lastIndex - i].name);
+            this.cubes.RemoveAt(lastIndex - i);
         }
     }
 }

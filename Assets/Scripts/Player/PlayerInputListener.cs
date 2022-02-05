@@ -8,16 +8,16 @@ public class PlayerInputListener : MonoBehaviour
     private PlayerMovement controller;
 
     private void Awake() {
-        controller = GetComponent<PlayerMovement>();
+        this.controller = GetComponent<PlayerMovement>();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
         if (context.performed) {
             Vector2 movement = context.ReadValue<Vector2>();
-            controller.OnMovement(movement.x);
+            this.controller.OnMovement(movement.x);
         } else if (context.canceled) {
-            controller.OnMovement(0f);
+            this.controller.OnMovement(0f);
         }
     }
 }

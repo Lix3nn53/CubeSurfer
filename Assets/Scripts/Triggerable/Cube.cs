@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Cube : Triggerable
 {
-
     public override void OnTrigger(Collider other) {
         var go = other.gameObject;
         if (go == null || !other.gameObject.CompareTag("Player"))
