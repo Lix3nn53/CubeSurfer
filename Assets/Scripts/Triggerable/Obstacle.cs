@@ -9,8 +9,8 @@ public class Obstacle : Triggerable
         if (go == null || !other.gameObject.CompareTag("Player"))
             return;
 
-        int offsetFromGround = (int) (this.gameObject.transform.localPosition.y + 0.5f);
-        int height = (int) (this.gameObject.transform.localScale.y + 0.5f);
+        int offsetFromGround = (int) (this.gameObject.transform.parent.localPosition.y);
+        int height = (int) (this.gameObject.transform.parent.localScale.y + 0.5f);
 
         CubeCollector.Instance.OnObstacle(offsetFromGround, height);
     }
