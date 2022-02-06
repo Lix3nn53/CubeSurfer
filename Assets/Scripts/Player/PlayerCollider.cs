@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +20,6 @@ public class PlayerCollider : MonoBehaviour
     [SerializeField] private GameObject playerGraphics;
     [SerializeField] private float heightPerCube = 1.0f;
     [SerializeField] private float jumpOnCollect = 0.2f;
-    [SerializeField] private float distanceBetweenCubes = 0.1f;
     [SerializeField] private List<GameObject> cubes = new List<GameObject>();
 
     void Awake()
@@ -35,15 +36,14 @@ public class PlayerCollider : MonoBehaviour
     }
 
     public void OnCube(GameObject cube) {
-        int cubeCount = this.cubes.Count;
-
         // Container Height
-        float containerY = this.graphicsContainer.transform.position.y + this.heightPerCube + this.distanceBetweenCubes;
+        float containerY = this.graphicsContainer.transform.position.y + this.heightPerCube + 0.2f;
         this.graphicsContainer.transform.position = new Vector3(this.graphicsContainer.transform.position.x, containerY, this.graphicsContainer.transform.position.z);
 
         // Add New Cube To Container
         cube.transform.parent = this.cubeContainer.gameObject.transform;
-        float localY = -cubeCount - (this.distanceBetweenCubes * cubeCount);
+        float localY = cubes[cubes.Count - 1].transform.localPosition.y - this.heightPerCube;
+        Debug.Log("localY: " + localY);
         cube.transform.localPosition = new Vector3(0, localY, 0);
         this.cubes.Add(cube);
 
@@ -57,22 +57,38 @@ public class PlayerCollider : MonoBehaviour
 
         // AudioManager.Instance.Play("interractEnter");
     }
-    public void OnObstacle(int start, int height) {
-        Debug.Log("START: " + start);
-        Debug.Log("height: " + height);
+    public void OnObstacle(Obstacle.ObstaclePart[] parts) {
+        List<int> toRemove = new List<int>();
+        int requiredCount = 0;
+        foreach (Obstacle.ObstaclePart part in parts)
+        {
+            int currentCount = part.start + part.height;
+            if (currentCount > requiredCount) {
+                requiredCount = currentCount;
+            }
+
+            for (int i = part.start; i < part.start + part.height; i++) {
+                toRemove.Add(i);
+            }
+        }
 
         // Check for gameover
-        int total = start + height;
         int count = this.cubes.Count;
-        int requiredCount = total;
         if (count <= requiredCount) {
             PlayerMovement.Instance.StopRunning();
             return;
         }
 
         // Remove cubes from player
+        if (toRemove.Count > 1) {
+            toRemove = toRemove.Distinct().ToList();
+            toRemove.Sort();
+        }
+        foreach(int x in toRemove) {
+            Debug.Log("TOREMOVE: " + x);
+        }
         int lastIndex = count - 1;
-        for (int i = start; i < total; i++) {
+        foreach (int i in toRemove) {
             this.cubes[lastIndex - i].transform.parent = null;
             Debug.Log(this.cubes[lastIndex - i].name);
             this.cubes.RemoveAt(lastIndex - i);
