@@ -6,12 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
     [SerializeField] private float speedForward = 200;
-    [SerializeField] private float speedSideways = 300;
 
     private new Rigidbody rigidbody;
-    private float movementInput;
     private bool isRunning = true;
-
+    public int Line { get; private set; } // 0, 1, 2, 3, 4
 
     void Awake()
     {
@@ -26,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rigidbody = GetComponent<Rigidbody>();
+
+        Line = 2;
     }
 
     private void FixedUpdate()
@@ -34,14 +34,37 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        float sideWaysVelocity = movementInput * this.speedSideways * Time.deltaTime;
         float forwardVelocity =  this.speedForward * Time.deltaTime;
 
-        rigidbody.velocity = new Vector3(-forwardVelocity, 0, sideWaysVelocity);
+        rigidbody.velocity = new Vector3(-forwardVelocity, 0, 0);
 	}
 
     public void OnMovementInput(float movement) {
-			this.movementInput = movement;
+			if (movement == 0) {
+                return;
+            }
+            
+            if (movement > 0) {
+                MoveRight();
+            } else {
+                MoveLeft();
+            }
+	}
+
+    public void MoveRight() {
+			if (Line == 4) {
+                return;
+            }
+            Line += 1;
+			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
+	}
+
+    public void MoveLeft() {
+            if (Line == 0) {
+                return;
+            }
+            Line -= 1;
+			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
 	}
 
     public void StopRunning() {
