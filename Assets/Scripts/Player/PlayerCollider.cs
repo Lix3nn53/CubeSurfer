@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeCollector : MonoBehaviour
+/// <summary>
+/// The PlayerCollider handles what happens when the player collides with something.
+/// 
+/// The Player can collide with:
+/// - Cube
+/// - Obstacle
+/// - Crystal
+/// </summary>
+public class PlayerCollider : MonoBehaviour
 {
-    public static CubeCollector Instance;
+    public static PlayerCollider Instance;
     [SerializeField] private GameObject graphicsContainer;
     [SerializeField] private GameObject cubeContainer;
     [SerializeField] private GameObject playerGraphics;
@@ -26,7 +34,7 @@ public class CubeCollector : MonoBehaviour
         }
     }
 
-    public void OnCollect(GameObject cube) {
+    public void OnCube(GameObject cube) {
         int cubeCount = this.cubes.Count;
 
         // Container Height
@@ -53,8 +61,18 @@ public class CubeCollector : MonoBehaviour
         Debug.Log("START: " + start);
         Debug.Log("height: " + height);
 
-        int lastIndex = this.cubes.Count - 1;
-        for (int i = start; i < start + height; i++) {
+        // Check for gameover
+        int total = start + height;
+        int count = this.cubes.Count;
+        int requiredCount = total;
+        if (count <= requiredCount) {
+            PlayerMovement.Instance.StopRunning();
+            return;
+        }
+
+        // Remove cubes from player
+        int lastIndex = count - 1;
+        for (int i = start; i < total; i++) {
             this.cubes[lastIndex - i].transform.parent = null;
             Debug.Log(this.cubes[lastIndex - i].name);
             this.cubes.RemoveAt(lastIndex - i);

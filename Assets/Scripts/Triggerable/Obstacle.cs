@@ -12,6 +12,6 @@ public class Obstacle : Triggerable
         int offsetFromGround = (int) (this.gameObject.transform.parent.localPosition.y);
         int height = (int) (this.gameObject.transform.parent.localScale.y + 0.5f);
 
-        CubeCollector.Instance.OnObstacle(offsetFromGround, height);
+        PlayerCollider.Instance.OnObstacle(offsetFromGround, height);
     }
 }

@@ -9,7 +9,7 @@ public class Cube : Triggerable
         if (go == null || !other.gameObject.CompareTag("Player"))
             return;
 
-        CubeCollector.Instance.OnCollect(this.gameObject);
+        PlayerCollider.Instance.OnCube(this.gameObject);
         Destroy(this); // Removes this script instance from the game object
     }
 }

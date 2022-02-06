@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.92
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.24
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -909,7 +909,7 @@ GameObject:
   - component: {fileID: 1181500974}
   - component: {fileID: 1181500973}
   m_Layer: 0
-  m_Name: CubeCollector
+  m_Name: PlayerCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1693,7 +1693,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4810996, y: 1}
+    m_SensorSize: {x: 2.2024014, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1743,7 +1743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalRotation.w
