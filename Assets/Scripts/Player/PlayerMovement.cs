@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         float forwardVelocity =  this.speedForward * Time.deltaTime;
 
-        rigidbody.velocity = new Vector3(-forwardVelocity, 0, 0);
+        rigidbody.velocity = new Vector3(forwardVelocity, 0, 0);
 	}
 
     public void OnMovementInput(float movement) {
@@ -52,18 +52,18 @@ public class PlayerMovement : MonoBehaviour
 	}
 
     public void MoveRight() {
-			if (Line == 4) {
+			if (Line == 0) {
                 return;
             }
-            Line += 1;
+            Line -= 1;
 			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
 	}
 
     public void MoveLeft() {
-            if (Line == 0) {
+            if (Line == 4) {
                 return;
             }
-            Line -= 1;
+            Line += 1;
 			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
 	}
 
