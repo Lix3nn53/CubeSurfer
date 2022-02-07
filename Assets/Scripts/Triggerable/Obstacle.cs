@@ -17,7 +17,26 @@ public class Obstacle : Triggerable
         if (go == null || !other.gameObject.CompareTag("Player"))
             return;
 
-        ObstaclePart[] parts = lines[PlayerMovement.Instance.Line];
+        float line = PlayerMovement.Instance.gameObject.transform.localPosition.z;
+
+        int indexMin = (int) (line);
+        int indexMax = (int) (line + 0.9f);
+        Debug.Log("indexMin: " + indexMin);
+        Debug.Log("indexMax: " + indexMax);
+
+        ObstaclePart[] parts;
+        if (indexMin < 0) {
+            parts = lines[indexMax];
+        } else if (indexMax > 4) {
+            parts = lines[indexMin];
+        } else {
+            ObstaclePart[] x = lines[indexMin];
+            ObstaclePart[] y = lines[indexMax];
+
+            parts = new ObstaclePart[x.Length + y.Length];
+            x.CopyTo(parts, 0);
+            y.CopyTo(parts, x.Length);
+        }
 
         PlayerCollider.Instance.OnObstacle(parts);
     }

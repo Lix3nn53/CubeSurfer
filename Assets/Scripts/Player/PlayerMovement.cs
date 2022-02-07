@@ -6,10 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
     [SerializeField] private float speedForward = 200;
-
+    [SerializeField] private float speedSideways = 300;
     private new Rigidbody rigidbody;
     private bool isRunning = true;
-    public int Line { get; private set; } // 0, 1, 2, 3, 4
+
+    private float movementInput;
 
     void Awake()
     {
@@ -24,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rigidbody = GetComponent<Rigidbody>();
-
-        Line = 2;
     }
 
     private void FixedUpdate()
@@ -35,36 +34,29 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float forwardVelocity =  this.speedForward * Time.deltaTime;
+        float sidewaysVelocity = this.speedSideways * Time.deltaTime * -this.movementInput;
 
-        rigidbody.velocity = new Vector3(forwardVelocity, 0, 0);
+        if (rigidbody.position.z >= 4) {
+            rigidbody.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 4);
+
+            if (movementInput < 0) {
+                sidewaysVelocity = 0;
+            }
+        } else if (rigidbody.position.z <= 0) {
+            rigidbody.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 0);
+
+            if (movementInput > 0) {
+                sidewaysVelocity = 0;
+            }
+        }
+
+        rigidbody.velocity = new Vector3(forwardVelocity, 0, sidewaysVelocity);
+
+        
 	}
 
     public void OnMovementInput(float movement) {
-			if (movement == 0) {
-                return;
-            }
-            
-            if (movement > 0) {
-                MoveRight();
-            } else {
-                MoveLeft();
-            }
-	}
-
-    public void MoveRight() {
-			if (Line == 0) {
-                return;
-            }
-            Line -= 1;
-			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
-	}
-
-    public void MoveLeft() {
-            if (Line == 4) {
-                return;
-            }
-            Line += 1;
-			transform.position = new Vector3(transform.position.x, transform.position.y, Line - 2);
+        this.movementInput = movement;
 	}
 
     public void StopRunning() {
