@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class TrackManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] trackPrefab;
-    [SerializeField] private float trackLength = 100;
+    public static float SegmentLength = 50;
+    private TrackSegment[] segmentPrefabs;
 
-    private GameObject[] trackBuffer;
+    private TrackSegment[] segmentBuffer;
 
     private void Awake() {
-        this.trackBuffer = new GameObject[trackPrefab.Length];
+        // Init prefabs
+        this.segmentPrefabs = new TrackSegment[transform.childCount];
+        for (int i = 0; i < segmentPrefabs.Length; i++) {
+            Transform segment = transform.GetChild(i);
 
-        for (int i = 0; i < trackBuffer.Length; i++) {
-            this.trackBuffer[i] = this.trackPrefab[i];
+            this.segmentPrefabs[i] = segment.GetComponent<TrackSegment>();
+        }
 
-            this.trackBuffer[i].transform.position = new Vector3(-this.trackLength + (i * this.trackLength), 0, 0);
+        // Init buffer
+        this.segmentBuffer = new TrackSegment[segmentPrefabs.Length];
+
+        for (int i = 0; i < segmentBuffer.Length; i++) {
+            this.segmentBuffer[i] = this.segmentPrefabs[i];
+
+            this.segmentBuffer[i].transform.position = new Vector3(-SegmentLength + (i * SegmentLength), 0, 0);
         }
     }
     
@@ -24,19 +33,19 @@ public class TrackManager : MonoBehaviour
         Vector3 position = PlayerMovement.Instance.transform.position;
         float distance = position.x;
 
-        if (distance > trackLength) {
+        if (distance > SegmentLength) {
             PlayerMovement.Instance.transform.position = new Vector3(0, position.y, position.z);
 
-            GameObject temp = this.trackBuffer[0];
+            TrackSegment temp = this.segmentBuffer[0];
 
-            for (int i = 0; i < trackBuffer.Length - 1; i++) {
-                this.trackBuffer[i] = this.trackBuffer[i + 1];
+            for (int i = 0; i < segmentBuffer.Length - 1; i++) {
+                this.segmentBuffer[i] = this.segmentBuffer[i + 1];
 
-                this.trackBuffer[i].transform.position = new Vector3(-this.trackLength + (i * this.trackLength), 0, 0);
+                this.segmentBuffer[i].transform.position = new Vector3(-SegmentLength + (i * SegmentLength), 0, 0);
             }
 
-            this.trackBuffer[trackBuffer.Length - 1] = temp;
-            this.trackBuffer[trackBuffer.Length - 1].transform.position = new Vector3(-this.trackLength + (trackLength * (trackBuffer.Length - 1)), 0, 0);
+            this.segmentBuffer[segmentBuffer.Length - 1] = temp;
+            this.segmentBuffer[segmentBuffer.Length - 1].transform.position = new Vector3(-SegmentLength + (SegmentLength * (segmentBuffer.Length - 1)), 0, 0);
         }
     }
 }
