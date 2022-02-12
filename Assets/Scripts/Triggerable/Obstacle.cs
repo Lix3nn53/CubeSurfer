@@ -21,8 +21,6 @@ public class Obstacle : Triggerable
 
         int indexMin = (int) (line);
         int indexMax = (int) (line + 0.9f);
-        Debug.Log("indexMin: " + indexMin);
-        Debug.Log("indexMax: " + indexMax);
 
         ObstaclePart[] parts;
         if (indexMin < 0) {

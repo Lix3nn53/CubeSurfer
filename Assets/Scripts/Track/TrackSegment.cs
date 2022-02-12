@@ -59,6 +59,7 @@ public class TrackSegment : MonoBehaviour
 
             SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
             segmentPart.transform.parent = transform;
+            segmentParts[i] = segmentPart;
 
             BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
             betweenParts.transform.parent = transform;

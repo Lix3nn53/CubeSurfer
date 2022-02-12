@@ -75,6 +75,7 @@ public class PlayerCollider : MonoBehaviour
         int count = this.cubes.Count;
         if (count <= requiredCount) {
             PlayerMovement.Instance.StopRunning();
+            Debug.Log("GAME OVER");
             return;
         }
 
