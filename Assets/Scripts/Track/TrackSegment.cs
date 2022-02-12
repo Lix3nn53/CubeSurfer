@@ -20,6 +20,8 @@ public class TrackSegment : MonoBehaviour
         partOffset = (((int) TrackManager.Instance.SegmentLength) - (partCount * partEveryLength)) / partCount;
 
         betweenPartsArray = new BetweenParts[partCount + 1];
+
+        generate();
     }
 
     private void clear()
@@ -60,7 +62,7 @@ public class TrackSegment : MonoBehaviour
 
             BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
             betweenParts.transform.parent = transform;
-            betweenParts.generate(previousX, x);
+            betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x);
             betweenPartsArray[i] = betweenParts;
 
             previousX = x;
@@ -69,7 +71,7 @@ public class TrackSegment : MonoBehaviour
         // Cubes from last part until end of segment
         BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
         betweenPartss.transform.parent = transform;
-        betweenPartss.generate(previousX, transform.position.x + TrackManager.Instance.SegmentLength);
+        betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength);
         betweenPartsArray[partCount] = betweenPartss;
     }
 
