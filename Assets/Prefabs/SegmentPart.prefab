@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 4583053730773322661}
   - component: {fileID: 4583053730773322663}
   - component: {fileID: 4583053730773322660}
+  - component: {fileID: 695011327}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -180,6 +181,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &695011327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053730773322658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053730883635665
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +204,7 @@ GameObject:
   - component: {fileID: 4583053730883635664}
   - component: {fileID: 4583053730883635666}
   - component: {fileID: 4583053730883635667}
+  - component: {fileID: 804373900}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -263,6 +277,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &804373900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053730883635665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053730981303537
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +491,7 @@ GameObject:
   - component: {fileID: 4583053731730518504}
   - component: {fileID: 4583053731730518506}
   - component: {fileID: 4583053731730518507}
+  - component: {fileID: 1652276660}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -537,6 +564,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1652276660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053731730518505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053731858096161
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +683,7 @@ GameObject:
   - component: {fileID: 4583053732132466136}
   - component: {fileID: 4583053732132466138}
   - component: {fileID: 4583053732132466139}
+  - component: {fileID: 2053136772}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -716,6 +756,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2053136772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053732132466137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053732137156497
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +779,7 @@ GameObject:
   - component: {fileID: 4583053732137156496}
   - component: {fileID: 4583053732137156498}
   - component: {fileID: 4583053732137156499}
+  - component: {fileID: 2058941388}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -799,6 +852,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2058941388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053732137156497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053732142773066
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +907,7 @@ GameObject:
   - component: {fileID: 4583053732158178589}
   - component: {fileID: 4583053732158178591}
   - component: {fileID: 4583053732158178588}
+  - component: {fileID: 2079967559}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -914,6 +980,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2079967559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053732158178586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053732205471657
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +1035,7 @@ GameObject:
   - component: {fileID: 4583053732354092762}
   - component: {fileID: 4583053732354092764}
   - component: {fileID: 4583053732354092765}
+  - component: {fileID: 1196860038}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -1029,6 +1108,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1196860038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053732354092763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053732508455273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1131,7 @@ GameObject:
   - component: {fileID: 4583053732508455272}
   - component: {fileID: 4583053732508455274}
   - component: {fileID: 4583053732508455275}
+  - component: {fileID: 1352211764}
   m_Layer: 0
   m_Name: ObstacleGraphics
   m_TagString: Untagged
@@ -1112,6 +1204,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1352211764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583053732508455273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccca4c25af417c44ac71fd453c7d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4583053732704964491
 GameObject:
   m_ObjectHideFlags: 0

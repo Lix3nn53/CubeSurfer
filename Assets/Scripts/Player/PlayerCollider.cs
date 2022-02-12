@@ -86,7 +86,7 @@ public class PlayerCollider : MonoBehaviour
         int lastIndex = count - 1;
         foreach (int i in toRemove) {
             GameObject cubeToRemove = this.cubes[lastIndex - i];
-            cubeToRemove.transform.parent = null;
+            cubeToRemove.transform.parent = GameManager.Instance.CubeThrash.transform;
             cubeToRemove.transform.localPosition = new Vector3((int) (cubeToRemove.transform.localPosition.x + 0.5f), cubeToRemove.transform.localPosition.y, cubeToRemove.transform.localPosition.z);
             this.cubes.RemoveAt(lastIndex - i);
         }

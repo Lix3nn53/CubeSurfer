@@ -5,8 +5,16 @@ using UnityEngine;
 public class TrackManager : MonoBehaviour
 {
     public static TrackManager Instance;
+
+    // For TrackSegment
     public GameObject SegmentPartPrefab;
     public float SegmentLength = 50;
+
+    // For BetweenParts
+    public GameObject BetweenPartsPrefab;
+    public GameObject CubePrefab;
+    public int CubeLength = 1;
+    public int CubeDistanceBetween = 1;
 
     private TrackSegment[] segmentPrefabs;
 
