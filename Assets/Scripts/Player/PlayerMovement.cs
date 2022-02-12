@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
     public void StopRunning() {
-			this.isRunning = false;
-            rigidbody.velocity = new Vector3(0, 0, 0);
+        this.isRunning = false;
+        rigidbody.velocity = new Vector3(0, 0, 0);
 	}
 }

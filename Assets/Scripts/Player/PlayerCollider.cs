@@ -56,10 +56,10 @@ public class PlayerCollider : MonoBehaviour
 
         // AudioManager.Instance.Play("interractEnter");
     }
-    public void OnObstacle(ObstacleGroup.ObstaclePart[] parts) {
+    public void OnObstacle(ObstacleGroup.ObstacleLine[] parts) {
         List<int> toRemove = new List<int>();
         int requiredCount = 0;
-        foreach (ObstacleGroup.ObstaclePart part in parts)
+        foreach (ObstacleGroup.ObstacleLine part in parts)
         {
             int currentCount = part.start + part.height;
             if (currentCount > requiredCount) {

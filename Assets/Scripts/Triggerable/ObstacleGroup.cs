@@ -4,13 +4,13 @@ using UnityEngine;
 public class ObstacleGroup : Triggerable
 {
     [Serializable]
-    public struct ObstaclePart
+    public struct ObstacleLine
     {
         public int start;
         public int height;
     }
 
-    [SerializeField] private ObstaclePart[][] lines;
+    [SerializeField] private ObstacleLine[][] lines;
 
     public override void OnTrigger(Collider other) {
         var go = other.gameObject;
@@ -22,16 +22,16 @@ public class ObstacleGroup : Triggerable
         int indexMin = (int) (line);
         int indexMax = (int) (line + 0.9f);
 
-        ObstaclePart[] parts;
+        ObstacleLine[] parts;
         if (indexMin < 0) {
             parts = lines[indexMax];
         } else if (indexMax > 4) {
             parts = lines[indexMin];
         } else {
-            ObstaclePart[] x = lines[indexMin];
-            ObstaclePart[] y = lines[indexMax];
+            ObstacleLine[] x = lines[indexMin];
+            ObstacleLine[] y = lines[indexMax];
 
-            parts = new ObstaclePart[x.Length + y.Length];
+            parts = new ObstacleLine[x.Length + y.Length];
             x.CopyTo(parts, 0);
             y.CopyTo(parts, x.Length);
         }
@@ -41,40 +41,45 @@ public class ObstacleGroup : Triggerable
 
     void Awake() {
         RandomShape();
-        AutoFillLineData();
+        // AutoFillLineData();
     }
 
     private void AutoFillLineData() {
-        lines = new ObstaclePart[5][];
+        lines = new ObstacleLine[5][];
         for (int i = 0; i < 5; i++) {
             Transform obstacleLine = transform.GetChild(i);
             int lineIndex = (int) obstacleLine.localPosition.z + 2;
 
             int obstacleCount = obstacleLine.childCount;
-            lines[i] = new ObstaclePart[obstacleCount];
+            lines[i] = new ObstacleLine[obstacleCount];
             for (int y = 0; y < obstacleCount; y++) {
                 Transform obstacle = obstacleLine.GetChild(y);
 
-                ObstaclePart obstaclePart = new ObstaclePart() { start = (int) obstacle.localPosition.y, height = (int) obstacle.localScale.y };
+                ObstacleLine obstaclePart = new ObstacleLine() { start = (int) obstacle.localPosition.y, height = (int) obstacle.localScale.y };
                 lines[i][y] = obstaclePart;
             }
         }
     }
 
     public void RandomShape() {
+        lines = new ObstacleLine[5][]; // Save data
         for (int i = 0; i < 5; i++) {
             Transform obstacleLine = transform.GetChild(i);
 
-            int obstacleCount = UnityEngine.Random.Range(1, 4);
+            int obstacleCount = UnityEngine.Random.Range(0, 4);
+            lines[i] = new ObstacleLine[obstacleCount]; // Save data
 
             float startHeight = TrackManager.Instance.ObstacleStartHeight;
-
             for (int y = 0; y < obstacleCount; y++) {
                 GameObject obstacle = Instantiate(TrackManager.Instance.ObstaclePrefab, new Vector3(0, startHeight, 0), Quaternion.identity);
                 obstacle.transform.parent = obstacleLine;
                 int obstacleHeight = UnityEngine.Random.Range(1, 3);
                 obstacle.transform.localScale = new Vector3(1, obstacleHeight, 1);
                 obstacle.transform.localPosition = new Vector3(0, startHeight, 0);
+
+                // Save data
+                ObstacleLine obstaclePart = new ObstacleLine() { start = (int) startHeight, height = obstacleHeight };
+                lines[i][y] = obstaclePart;
 
                 startHeight += obstacleHeight + 1;
             }
