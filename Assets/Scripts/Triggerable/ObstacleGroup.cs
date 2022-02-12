@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Obstacle : Triggerable
+public class ObstacleGroup : Triggerable
 {
     [Serializable]
     public struct ObstaclePart
@@ -40,6 +40,7 @@ public class Obstacle : Triggerable
     }
 
     void Awake() {
+        RandomShape();
         AutoFillLineData();
     }
 
@@ -56,6 +57,26 @@ public class Obstacle : Triggerable
 
                 ObstaclePart obstaclePart = new ObstaclePart() { start = (int) obstacle.localPosition.y, height = (int) obstacle.localScale.y };
                 lines[i][y] = obstaclePart;
+            }
+        }
+    }
+
+    public void RandomShape() {
+        for (int i = 0; i < 5; i++) {
+            Transform obstacleLine = transform.GetChild(i);
+
+            int obstacleCount = UnityEngine.Random.Range(1, 4);
+
+            float startHeight = TrackManager.Instance.ObstacleStartHeight;
+
+            for (int y = 0; y < obstacleCount; y++) {
+                GameObject obstacle = Instantiate(TrackManager.Instance.ObstaclePrefab, new Vector3(0, startHeight, 0), Quaternion.identity);
+                obstacle.transform.parent = obstacleLine;
+                int obstacleHeight = UnityEngine.Random.Range(1, 3);
+                obstacle.transform.localScale = new Vector3(1, obstacleHeight, 1);
+                obstacle.transform.localPosition = new Vector3(0, startHeight, 0);
+
+                startHeight += obstacleHeight + 1;
             }
         }
     }

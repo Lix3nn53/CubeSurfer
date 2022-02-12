@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class RandomColor : MonoBehaviour
 {
-    private Renderer _renderer = null;
-    private MaterialPropertyBlock materialPropertyBlock = null;
-
     private void Awake() {
-        _renderer = GetComponent<Renderer>();
-        materialPropertyBlock = new MaterialPropertyBlock();
-
+        MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
         Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         materialPropertyBlock.SetColor("_BaseColor", randomColor);
-        _renderer.SetPropertyBlock(materialPropertyBlock);
+
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers) {
+            materialPropertyBlock.SetColor("_BaseColor", randomColor);
+            renderer.SetPropertyBlock(materialPropertyBlock);
+        }
     }
 }

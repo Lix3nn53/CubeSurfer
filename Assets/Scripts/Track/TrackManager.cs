@@ -6,15 +6,19 @@ public class TrackManager : MonoBehaviour
 {
     public static TrackManager Instance;
 
-    // For TrackSegment
+    [Header("TrackSegment")]
     public GameObject SegmentPartPrefab;
     public float SegmentLength = 50;
 
-    // For BetweenParts
+    [Header("BetweenParts")]
     public GameObject BetweenPartsPrefab;
     public GameObject CubePrefab;
     public int CubeLength = 1;
     public int CubeDistanceBetween = 1;
+
+    [Header("Obstacle")]
+    public GameObject ObstaclePrefab;
+    public float ObstacleStartHeight = 0.5f;
 
     private TrackSegment[] segmentPrefabs;
 
