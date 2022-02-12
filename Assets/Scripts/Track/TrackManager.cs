@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class TrackManager : MonoBehaviour
 {
-    public static float SegmentLength = 50;
+    public static TrackManager Instance;
+    public GameObject SegmentPartPrefab;
+    public float SegmentLength = 50;
+
     private TrackSegment[] segmentPrefabs;
 
     private TrackSegment[] segmentBuffer;
 
     private void Awake() {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+        
         // Init prefabs
         this.segmentPrefabs = new TrackSegment[transform.childCount];
         for (int i = 0; i < segmentPrefabs.Length; i++) {
@@ -46,6 +59,8 @@ public class TrackManager : MonoBehaviour
 
             this.segmentBuffer[segmentBuffer.Length - 1] = temp;
             this.segmentBuffer[segmentBuffer.Length - 1].transform.position = new Vector3(-SegmentLength + (SegmentLength * (segmentBuffer.Length - 1)), 0, 0);
+            // Regenerate the segment while moving from 0 to the end
+            this.segmentBuffer[segmentBuffer.Length - 1].OnRestart();
         }
     }
 }

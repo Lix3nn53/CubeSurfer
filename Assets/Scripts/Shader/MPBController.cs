@@ -6,14 +6,14 @@ public class MPBController : MonoBehaviour
 {
     [SerializeField] private Color mainColor = Color.black;
 
-    private Renderer renderer = null;
+    private Renderer _renderer = null;
     private MaterialPropertyBlock materialPropertyBlock = null;
 
     private void Awake() {
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
         materialPropertyBlock = new MaterialPropertyBlock();
 
         materialPropertyBlock.SetColor("_BaseColor", mainColor);
-        renderer.SetPropertyBlock(materialPropertyBlock);
+        _renderer.SetPropertyBlock(materialPropertyBlock);
     }
 }
