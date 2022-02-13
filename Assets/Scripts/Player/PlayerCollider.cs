@@ -58,25 +58,11 @@ public class PlayerCollider : MonoBehaviour
     }
     public void OnObstacle(ObstacleGroup.ObstacleLine[] parts) {
         List<int> toRemove = new List<int>();
-        int requiredCount = 0;
         foreach (ObstacleGroup.ObstacleLine part in parts)
         {
-            int currentCount = part.start + part.height;
-            if (currentCount > requiredCount) {
-                requiredCount = currentCount;
-            }
-
             for (int i = part.start; i < part.start + part.height; i++) {
                 toRemove.Add(i);
             }
-        }
-
-        // Check for gameover
-        int count = this.cubes.Count;
-        if (count <= requiredCount) {
-            PlayerMovement.Instance.StopRunning();
-            Debug.Log("GAME OVER");
-            return;
         }
 
         // Remove cubes from player
@@ -84,10 +70,19 @@ public class PlayerCollider : MonoBehaviour
             toRemove = toRemove.Distinct().ToList();
             toRemove.Sort();
         }
+
+        // Check for gameover
+        int count = this.cubes.Count;
+        if (count <= toRemove.Count) {
+            PlayerMovement.Instance.StopRunning();
+            Debug.Log("GAME OVER");
+            return;
+        }
+
         int lastIndex = count - 1;
         foreach (int i in toRemove) {
             GameObject cubeToRemove = this.cubes[lastIndex - i];
-            cubeToRemove.transform.parent = GameManager.Instance.CubeThrash.transform;
+            cubeToRemove.transform.parent = TrackManager.Instance.GetCurrentSegment().DroppedCubeThrash.transform; // Add dropped cube to thrash of current segment
             cubeToRemove.transform.localPosition = new Vector3((int) (cubeToRemove.transform.localPosition.x + 0.5f), cubeToRemove.transform.localPosition.y, cubeToRemove.transform.localPosition.z);
             this.cubes.RemoveAt(lastIndex - i);
         }

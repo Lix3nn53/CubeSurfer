@@ -51,6 +51,10 @@ public class TrackManager : MonoBehaviour
 
             this.segmentBuffer[i].transform.position = new Vector3(-SegmentLength + (i * SegmentLength), 0, 0);
         }
+
+        for (int i = 2; i < segmentBuffer.Length; i++) {
+            this.segmentBuffer[i].OnStart();
+        }
     }
     
     void FixedUpdate()
@@ -61,7 +65,7 @@ public class TrackManager : MonoBehaviour
         if (distance > SegmentLength) {
             PlayerMovement.Instance.transform.position = new Vector3(0, position.y, position.z);
 
-            TrackSegment temp = this.segmentBuffer[0];
+            TrackSegment temp = this.segmentBuffer[0]; // save 0 for moving to end
 
             for (int i = 0; i < segmentBuffer.Length - 1; i++) {
                 this.segmentBuffer[i] = this.segmentBuffer[i + 1];
@@ -74,5 +78,9 @@ public class TrackManager : MonoBehaviour
             // Regenerate the segment while moving from 0 to the end
             this.segmentBuffer[segmentBuffer.Length - 1].OnRestart();
         }
+    }
+
+    public TrackSegment GetCurrentSegment() {
+        return this.segmentBuffer[1];
     }
 }

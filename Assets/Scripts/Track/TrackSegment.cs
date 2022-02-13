@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TrackSegment : MonoBehaviour
 {
-    private static int partEveryLength = 18;
-    private static int partOffset;
+    public GameObject DroppedCubeThrash;
+    private int partEveryLength;
+    private int partOffset;
     private int partCount;
 
     private SegmentPart[] segmentParts;
@@ -13,19 +14,10 @@ public class TrackSegment : MonoBehaviour
     // BetweenParts
     private BetweenParts[] betweenPartsArray;
 
-    private void Start() {
-        partCount = (int) TrackManager.Instance.SegmentLength / partEveryLength;
-        segmentParts = new SegmentPart[partCount];
-
-        partOffset = (((int) TrackManager.Instance.SegmentLength) - (partCount * partEveryLength)) / partCount;
-
-        betweenPartsArray = new BetweenParts[partCount + 1];
-
-        generate();
-    }
-
     private void clear()
     {
+        if (segmentParts == null) return;
+        
         for (int i = 0; i < segmentParts.Length; i++) {
             if (segmentParts[i] == null) {
                 continue;
@@ -44,9 +36,19 @@ public class TrackSegment : MonoBehaviour
         }
 
         // remove cubes dropped from player
-        for (int i = 0; i < GameManager.Instance.CubeThrash.transform.childCount; i++) {
-            Destroy(GameManager.Instance.CubeThrash.transform.GetChild(i).gameObject);
+        for (int i = 0; i < this.DroppedCubeThrash.transform.childCount; i++) {
+            Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
         }
+    }
+
+    private void randomize()
+    {
+        partCount = UnityEngine.Random.Range(1, 4);
+        partEveryLength = (int) TrackManager.Instance.SegmentLength / partCount;
+        partOffset = (int) TrackManager.Instance.SegmentLength % partCount;
+
+        segmentParts = new SegmentPart[partCount];
+        betweenPartsArray = new BetweenParts[partCount + 1];
     }
 
     private void generate()
@@ -76,8 +78,14 @@ public class TrackSegment : MonoBehaviour
         betweenPartsArray[partCount] = betweenPartss;
     }
 
+    public void OnStart() {
+        randomize();
+        generate();
+    }
+
     public void OnRestart() {
         clear();
+        randomize();
         generate();
     }
 }
