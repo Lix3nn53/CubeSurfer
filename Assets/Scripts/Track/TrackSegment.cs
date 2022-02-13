@@ -43,7 +43,7 @@ public class TrackSegment : MonoBehaviour
 
     private void randomize()
     {
-        partCount = UnityEngine.Random.Range(1, 4);
+        partCount = UnityEngine.Random.Range(2, 4);
         partEveryLength = (int) TrackManager.Instance.SegmentLength / partCount;
         partOffset = (int) TrackManager.Instance.SegmentLength % partCount;
 
@@ -65,7 +65,7 @@ public class TrackSegment : MonoBehaviour
 
             BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
             betweenParts.transform.parent = transform;
-            betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x);
+            betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x, UnityEngine.Random.Range(0, 5));
             betweenPartsArray[i] = betweenParts;
 
             previousX = x;
@@ -74,7 +74,7 @@ public class TrackSegment : MonoBehaviour
         // Cubes from last part until end of segment
         BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
         betweenPartss.transform.parent = transform;
-        betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength);
+        betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength, UnityEngine.Random.Range(0, 5));
         betweenPartsArray[partCount] = betweenPartss;
     }
 
