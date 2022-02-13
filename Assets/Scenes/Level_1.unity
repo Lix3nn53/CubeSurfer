@@ -1409,7 +1409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 912676305956109417, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1804,7 +1804,7 @@ MonoBehaviour:
   BetweenPartsPrefab: {fileID: 407945658750926087, guid: 369c73d35fa349a43b1e68a6ee36a54d, type: 3}
   CubePrefab: {fileID: 912676305956109413, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
   CubeLength: 1
-  CubeDistanceBetween: 4
+  CubeDistanceBetween: 12
   ObstaclePrefab: {fileID: 1577151573932281266, guid: 9a28ef9a38473264bb08daab64e5a7bd, type: 3}
   ObstacleStartHeight: 0.5
 --- !u!1 &833212798
@@ -2588,8 +2588,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181500971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1713166334}
@@ -2612,7 +2612,7 @@ MonoBehaviour:
   playerGraphics: {fileID: 1078285422}
   heightPerCube: 1
   jumpOnCollect: 0.2
-  cubes:
+  playerCubes:
   - {fileID: 1729518247}
   - {fileID: 1895739009}
   - {fileID: 1413069817}

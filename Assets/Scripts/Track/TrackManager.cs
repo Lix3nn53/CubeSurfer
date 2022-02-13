@@ -14,7 +14,7 @@ public class TrackManager : MonoBehaviour
     public GameObject BetweenPartsPrefab;
     public GameObject CubePrefab;
     public int CubeLength = 1;
-    public int CubeDistanceBetween = 1;
+    public int CubeDistanceBetween = 4;
 
     [Header("Obstacle")]
     public GameObject ObstaclePrefab;

@@ -20,7 +20,7 @@ public class PlayerCollider : MonoBehaviour
     [SerializeField] private GameObject playerGraphics;
     [SerializeField] private float heightPerCube = 1.0f;
     [SerializeField] private float jumpOnCollect = 0.2f;
-    [SerializeField] private List<GameObject> cubes = new List<GameObject>();
+    [SerializeField] private List<GameObject> playerCubes = new List<GameObject>();
 
     void Awake()
     {
@@ -42,9 +42,9 @@ public class PlayerCollider : MonoBehaviour
 
         // Add New Cube To Container
         cube.transform.parent = this.cubeContainer.gameObject.transform;
-        float localY = cubes[cubes.Count - 1].transform.localPosition.y - this.heightPerCube;
+        float localY = playerCubes[playerCubes.Count - 1].transform.localPosition.y - this.heightPerCube;
         cube.transform.localPosition = new Vector3(0, localY, 0);
-        this.cubes.Add(cube);
+        this.playerCubes.Add(cube);
 
         // PlayerGraphics Height
         float playerGraphicsY = this.playerGraphics.transform.localPosition.y + this.jumpOnCollect;
@@ -58,22 +58,29 @@ public class PlayerCollider : MonoBehaviour
     }
     public void OnObstacle(ObstacleGroup.ObstacleLine[] parts) {
         List<int> toRemove = new List<int>();
+        int requiredHeight = 0;
         foreach (ObstacleGroup.ObstacleLine part in parts)
         {
+            int currentHeight = part.start + part.height;
+            if (currentHeight > requiredHeight) {
+                requiredHeight = currentHeight;
+            }
+
             for (int i = part.start; i < part.start + part.height; i++) {
                 toRemove.Add(i);
             }
         }
 
-        // Remove cubes from player
+        // Remove playerCubes from player
         if (toRemove.Count > 1) {
             toRemove = toRemove.Distinct().ToList();
             toRemove.Sort();
         }
 
         // Check for gameover
-        int count = this.cubes.Count;
-        if (count <= toRemove.Count) {
+        int count = this.playerCubes.Count;
+        Debug.Log("requiredHeight: " + requiredHeight + " count: " + count);
+        if (count <= requiredHeight || count <= toRemove.Count) { // Gameover if player is below required height or if player loses all cubes 
             PlayerMovement.Instance.StopRunning();
             Debug.Log("GAME OVER");
             return;
@@ -81,10 +88,10 @@ public class PlayerCollider : MonoBehaviour
 
         int lastIndex = count - 1;
         foreach (int i in toRemove) {
-            GameObject cubeToRemove = this.cubes[lastIndex - i];
+            GameObject cubeToRemove = this.playerCubes[lastIndex - i];
             cubeToRemove.transform.parent = TrackManager.Instance.GetCurrentSegment().DroppedCubeThrash.transform; // Add dropped cube to thrash of current segment
             cubeToRemove.transform.localPosition = new Vector3((int) (cubeToRemove.transform.localPosition.x + 0.5f), cubeToRemove.transform.localPosition.y, cubeToRemove.transform.localPosition.z);
-            this.cubes.RemoveAt(lastIndex - i);
+            this.playerCubes.RemoveAt(lastIndex - i);
         }
     }
 }
