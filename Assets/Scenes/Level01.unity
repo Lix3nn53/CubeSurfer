@@ -2793,7 +2793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroy: 0
-  cubePrefab: {fileID: 912676305956109413, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
+  prefab: {fileID: 912676305956109413, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
   poolType: 0
   collectionChecks: 1
   maxPoolSize: 100
@@ -3422,7 +3422,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467020685}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3443,7 +3443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroy: 0
-  obstaclePrefab: {fileID: 1577151573932281266, guid: 9a28ef9a38473264bb08daab64e5a7bd, type: 3}
+  prefab: {fileID: 1577151573932281266, guid: 9a28ef9a38473264bb08daab64e5a7bd, type: 3}
   poolType: 0
   collectionChecks: 1
   maxPoolSize: 50
@@ -4445,7 +4445,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.6385965, y: 1}
+    m_SensorSize: {x: 0.738056, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

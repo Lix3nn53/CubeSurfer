@@ -53,7 +53,7 @@ public class TrackSegment : MonoBehaviour
     for (int i = 0; i < droppedCubes.Length; i++)
     {
       // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
-      CubePool.Instance.Pool.Release(droppedCubes[i]);
+      PoolManager.Get("CubePool").Pool.Release(droppedCubes[i]);
     }
   }
 

@@ -86,7 +86,7 @@ public class ObstacleGroup : Triggerable
       float startHeight = TrackManager.Instance.ObstacleStartHeight;
       for (int y = 0; y < obstacleCount; y++)
       {
-        GameObject obstacle = ObstaclePool.Instance.Pool.Get();
+        GameObject obstacle = PoolManager.Get("ObstaclePool").Pool.Get();
         obstacle.transform.SetPositionAndRotation(new Vector3(0, startHeight, 0), Quaternion.identity);
         obstacle.transform.SetParent(obstacleLine);
         int obstacleHeight = UnityEngine.Random.Range(1, 3);

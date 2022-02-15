@@ -13,8 +13,7 @@ public class BetweenParts : MonoBehaviour
       for (int i = 1; i <= randomHeight; i++)
       {
         // Cube cube = Instantiate(TrackManager.Instance.CubePrefab, new Vector3(cubeX, i, z), Quaternion.identity, transform).GetComponent<Cube>();
-        CubePool cubePool = CubePool.Instance;
-        GameObject cube = cubePool.Pool.Get();
+        GameObject cube = PoolManager.Get("CubePool").Pool.Get();
         cube.transform.SetParent(this.transform);
         cube.transform.position = new Vector3(cubeX, i, z);
       }
@@ -31,7 +30,7 @@ public class BetweenParts : MonoBehaviour
     for (int i = 0; i < cubes.Length; i++)
     {
       // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
-      CubePool.Instance.Pool.Release(cubes[i]);
+      PoolManager.Get("CubePool").Pool.Release(cubes[i]);
     }
 
     Destroy(this.gameObject);
