@@ -11,9 +11,19 @@ public class BetweenParts : MonoBehaviour
 
             for (int i = 1; i <= randomHeight; i++)
             {
-                Cube cube = Instantiate(TrackManager.Instance.CubePrefab, new Vector3(cubeX, i, z), Quaternion.identity).GetComponent<Cube>();
-                cube.transform.parent = transform;
+                // Cube cube = Instantiate(TrackManager.Instance.CubePrefab, new Vector3(cubeX, i, z), Quaternion.identity, transform).GetComponent<Cube>();
+                GameObject cube = CubePool.Instance.Get();
+                cube.transform.SetParent(this.transform);
+                cube.transform.position = new Vector3(cubeX, i, z);
             }
         }
+    }
+
+    public void returnCubesAndDestroySelf() {
+        for (int i = 0; i < transform.childCount; i++) {
+            CubePool.Instance.Return(transform.GetChild(i).gameObject);
+        }
+
+        Destroy(gameObject);
     }
 }

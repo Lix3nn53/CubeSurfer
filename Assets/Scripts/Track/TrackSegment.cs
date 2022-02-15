@@ -16,28 +16,33 @@ public class TrackSegment : MonoBehaviour
 
     private void clear()
     {
-        if (segmentParts == null) return;
-        
-        for (int i = 0; i < segmentParts.Length; i++) {
-            if (segmentParts[i] == null) {
-                continue;
-            }
+        if (segmentParts != null) {
+            for (int i = 0; i < segmentParts.Length; i++) {
+                if (segmentParts[i] == null) {
+                    continue;
+                }
 
-            Destroy(segmentParts[i].gameObject);
+                Destroy(segmentParts[i].gameObject);
+            }
         }
 
         // remove uncollected cubes
-        for (int i = 0; i < betweenPartsArray.Length; i++) {
-            if (betweenPartsArray[i] == null) {
-                continue;
-            }
+        if (betweenPartsArray != null) {
+            for (int i = 0; i < betweenPartsArray.Length; i++) {
+                if (betweenPartsArray[i] == null) {
+                    continue;
+                }
 
-            Destroy(betweenPartsArray[i].gameObject);
+                // Destroy(betweenPartsArray[i].gameObject);
+                betweenPartsArray[i].returnCubesAndDestroySelf();
+            }
         }
 
         // remove cubes dropped from player
         for (int i = 0; i < this.DroppedCubeThrash.transform.childCount; i++) {
-            Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
+            // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
+            CubePool.Instance.Return(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
+            // TODO: return to pool is not working while destroy is working
         }
     }
 
@@ -60,11 +65,11 @@ public class TrackSegment : MonoBehaviour
             float x = transform.position.x + (i * partEveryLength) + partOffset;
 
             SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
-            segmentPart.transform.parent = transform;
+            segmentPart.transform.SetParent(transform);
             segmentParts[i] = segmentPart;
 
             BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
-            betweenParts.transform.parent = transform;
+            betweenParts.transform.SetParent(transform);
             betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x, UnityEngine.Random.Range(0, 5));
             betweenPartsArray[i] = betweenParts;
 
@@ -73,7 +78,7 @@ public class TrackSegment : MonoBehaviour
 
         // Cubes from last part until end of segment
         BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
-        betweenPartss.transform.parent = transform;
+        betweenPartss.transform.SetParent(transform);
         betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength, UnityEngine.Random.Range(0, 5));
         betweenPartsArray[partCount] = betweenPartss;
     }

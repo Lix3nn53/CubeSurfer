@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObstacleGroup : Triggerable
 {
+    private static float hitBoxWidth = 0.9f;
+
     [Serializable]
     public struct ObstacleLine
     {
@@ -20,7 +22,7 @@ public class ObstacleGroup : Triggerable
         float line = PlayerMovement.Instance.gameObject.transform.localPosition.z;
 
         int indexMin = (int) (line);
-        int indexMax = (int) (line + 0.9f);
+        int indexMax = (int) (line + hitBoxWidth);
 
         ObstacleLine[] parts;
         if (indexMin < 0) {
@@ -72,7 +74,7 @@ public class ObstacleGroup : Triggerable
             float startHeight = TrackManager.Instance.ObstacleStartHeight;
             for (int y = 0; y < obstacleCount; y++) {
                 GameObject obstacle = Instantiate(TrackManager.Instance.ObstaclePrefab, new Vector3(0, startHeight, 0), Quaternion.identity);
-                obstacle.transform.parent = obstacleLine;
+                obstacle.transform.SetParent(obstacleLine);
                 int obstacleHeight = UnityEngine.Random.Range(1, 3);
                 obstacle.transform.localScale = new Vector3(1, obstacleHeight, 1);
                 obstacle.transform.localPosition = new Vector3(0, startHeight, 0);
