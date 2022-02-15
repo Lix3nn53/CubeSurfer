@@ -50,28 +50,28 @@ public class ObstacleGroup : Triggerable
   void Awake()
   {
     RandomShape();
-    // AutoFillLineData();
+    // AutoFillLineData(); // Random Shape already fills the data
   }
 
-  private void AutoFillLineData()
-  {
-    lines = new ObstacleLine[5][];
-    for (int i = 0; i < 5; i++)
-    {
-      Transform obstacleLine = transform.GetChild(i);
-      int lineIndex = (int)obstacleLine.localPosition.z + 2;
+  //   private void AutoFillLineData()
+  //   {
+  //     lines = new ObstacleLine[5][];
+  //     for (int i = 0; i < 5; i++)
+  //     {
+  //       Transform obstacleLine = transform.GetChild(i);
+  //       int lineIndex = (int)obstacleLine.localPosition.z + 2;
 
-      int obstacleCount = obstacleLine.childCount;
-      lines[i] = new ObstacleLine[obstacleCount];
-      for (int y = 0; y < obstacleCount; y++)
-      {
-        Transform obstacle = obstacleLine.GetChild(y);
+  //       int obstacleCount = obstacleLine.childCount;
+  //       lines[i] = new ObstacleLine[obstacleCount];
+  //       for (int y = 0; y < obstacleCount; y++)
+  //       {
+  //         Transform obstacle = obstacleLine.GetChild(y);
 
-        ObstacleLine obstaclePart = new ObstacleLine() { start = (int)obstacle.localPosition.y, height = (int)obstacle.localScale.y };
-        lines[i][y] = obstaclePart;
-      }
-    }
-  }
+  //         ObstacleLine obstaclePart = new ObstacleLine() { start = (int)obstacle.localPosition.y, height = (int)obstacle.localScale.y };
+  //         lines[i][y] = obstaclePart;
+  //       }
+  //     }
+  //   }
 
   public void RandomShape()
   {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrackManager : Singleton<TrackManager>
 {
+  #region Public Fields
 
   [Header("TrackSegment")]
   public GameObject SegmentPartPrefab;
@@ -17,10 +18,16 @@ public class TrackManager : Singleton<TrackManager>
   [Header("Obstacle")]
   public float ObstacleStartHeight = 0.5f;
 
+  #endregion
+
+  #region Private Fields
   private TrackSegment[] segmentPrefabs;
 
   private TrackSegment[] segmentBuffer;
 
+  #endregion
+
+  #region Unity Methods
   protected override void Awake()
   {
     base.Awake();
@@ -75,8 +82,14 @@ public class TrackManager : Singleton<TrackManager>
     }
   }
 
+  #endregion
+
+  #region Public Methods
+
   public TrackSegment GetCurrentSegment()
   {
     return this.segmentBuffer[1];
   }
+
+  #endregion
 }
