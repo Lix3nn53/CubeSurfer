@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class CubePool : MonoBehaviour
+public class SegmentPartPool : MonoBehaviour
 {
-  public static CubePool Instance;
+  public static SegmentPartPool Instance;
   void Awake()
   {
     if (Instance != null)
@@ -19,7 +19,7 @@ public class CubePool : MonoBehaviour
     }
   }
 
-  public GameObject cubePrefab;
+  public GameObject segmentPartPrefab;
   public enum PoolType
   {
     Stack,
@@ -51,7 +51,7 @@ public class CubePool : MonoBehaviour
 
   GameObject CreatePooledItem()
   {
-    GameObject go = Instantiate(cubePrefab);
+    GameObject go = Instantiate(segmentPartPrefab);
 
     return go;
   }
@@ -67,12 +67,11 @@ public class CubePool : MonoBehaviour
   {
     if (go == null)
     {
-      Debug.LogError("CubePool: Trying to take an item from the pool that is null");
+      Debug.LogError("SegmentPartPool: Trying to take an item from the pool that is null");
       return;
     }
 
     go.SetActive(true);
-    go.AddComponent<Cube>();
   }
 
   // If the pool capacity is reached then any items returned will be destroyed.

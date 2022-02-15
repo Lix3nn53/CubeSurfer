@@ -71,7 +71,9 @@ public class TrackSegment : MonoBehaviour
     {
       float x = transform.position.x + (i * partEveryLength) + partOffset;
 
-      SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
+      SegmentPart segmentPart = SegmentPartPool.Instance.Pool.Get().GetComponent<SegmentPart>();
+      segmentPart.transform.SetPositionAndRotation(new Vector3(x, 0, 0), Quaternion.identity);
+
       segmentPart.transform.SetParent(transform);
       segmentParts[i] = segmentPart;
 

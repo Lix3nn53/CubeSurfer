@@ -14,11 +14,6 @@ public class BetweenParts : MonoBehaviour
       {
         // Cube cube = Instantiate(TrackManager.Instance.CubePrefab, new Vector3(cubeX, i, z), Quaternion.identity, transform).GetComponent<Cube>();
         CubePool cubePool = CubePool.Instance;
-        if (cubePool == null)
-        {
-          Debug.Log("pool is null");
-          continue;
-        }
         GameObject cube = cubePool.Pool.Get();
         cube.transform.SetParent(this.transform);
         cube.transform.position = new Vector3(cubeX, i, z);
