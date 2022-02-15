@@ -23,11 +23,17 @@ public class BetweenParts : MonoBehaviour
 
   public void returnCubesAndDestroySelf()
   {
+    GameObject[] cubes = new GameObject[transform.childCount];
     for (int i = 0; i < transform.childCount; i++)
     {
-      CubePool.Instance.Pool.Release(transform.GetChild(i).gameObject);
+      cubes[i] = transform.GetChild(i).gameObject;
+    }
+    for (int i = 0; i < cubes.Length; i++)
+    {
+      // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
+      CubePool.Instance.Pool.Release(cubes[i]);
     }
 
-    Destroy(gameObject);
+    Destroy(this.gameObject);
   }
 }

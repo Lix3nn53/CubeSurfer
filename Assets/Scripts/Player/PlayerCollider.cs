@@ -12,27 +12,13 @@ using UnityEngine;
 /// - Obstacle
 /// - Crystal
 /// </summary>
-public class PlayerCollider : MonoBehaviour
+public class PlayerCollider : Singleton<PlayerCollider>
 {
-  public static PlayerCollider Instance;
   [SerializeField] private GameObject graphicsContainer;
   [SerializeField] private GameObject cubeContainer;
   [SerializeField] private GameObject playerGraphics;
   [SerializeField] private float heightPerCube = 1.0f;
   [SerializeField] private float jumpOnCollect = 0.2f;
-
-  void Awake()
-  {
-    if (Instance != null)
-    {
-      Destroy(gameObject);
-      return;
-    }
-    else
-    {
-      Instance = this;
-    }
-  }
 
   public void OnCube(GameObject cube)
   {

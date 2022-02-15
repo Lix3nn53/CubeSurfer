@@ -1341,6 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288433e54875b3a4590e7b1720751034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
 --- !u!4 &586041535
 Transform:
   m_ObjectHideFlags: 0
@@ -1801,11 +1802,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1451b9835c8254786f00b5d2433862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
+  SegmentPartPrefab: {fileID: 6615430373847733409, guid: 6e7961535fffd9c4e8ca997aac8a0a39, type: 3}
   SegmentLength: 100
   BetweenPartsPrefab: {fileID: 407945658750926087, guid: 369c73d35fa349a43b1e68a6ee36a54d, type: 3}
   CubeLength: 1
   CubeDistanceBetween: 12
-  ObstaclePrefab: {fileID: 1577151573932281266, guid: 9a28ef9a38473264bb08daab64e5a7bd, type: 3}
   ObstacleStartHeight: 0.5
 --- !u!1 &833212798
 GameObject:
@@ -2607,6 +2609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2166c30ac8ceaa6f994aa20d328b23ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
   graphicsContainer: {fileID: 1110684105}
   cubeContainer: {fileID: 1671100204}
   playerGraphics: {fileID: 1078285422}
@@ -2789,10 +2792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d70e174175d45943ae6c0abbb304bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
   cubePrefab: {fileID: 912676305956109413, guid: fcc0b0f4a831a054797615ca1531e62e, type: 3}
   poolType: 0
   collectionChecks: 1
-  maxPoolSize: 50
+  maxPoolSize: 25
 --- !u!1 &1285640251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3405,7 +3409,7 @@ GameObject:
   - component: {fileID: 1467020686}
   - component: {fileID: 1467020687}
   m_Layer: 0
-  m_Name: SegmentPartPool
+  m_Name: ObstaclePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3438,10 +3442,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08568f72bc62b2b4bb075c5553857575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentPartPrefab: {fileID: 6615430373847733409, guid: 6e7961535fffd9c4e8ca997aac8a0a39, type: 3}
+  DontDestroy: 0
+  obstaclePrefab: {fileID: 1577151573932281266, guid: 9a28ef9a38473264bb08daab64e5a7bd, type: 3}
   poolType: 0
   collectionChecks: 1
-  maxPoolSize: 25
+  maxPoolSize: 50
 --- !u!1 &1467773159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,6 +3980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677e315e194ace4a081948a96a1f28dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
   speedForward: 700
   speedSideways: 250
 --- !u!114 &1713166336
@@ -3989,6 +3995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69e41169173947ebb9b105d03b36952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: 0
 --- !u!54 &1713166337
 Rigidbody:
   m_ObjectHideFlags: 0

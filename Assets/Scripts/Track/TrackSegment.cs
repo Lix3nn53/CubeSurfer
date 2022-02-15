@@ -45,11 +45,15 @@ public class TrackSegment : MonoBehaviour
     }
 
     // remove cubes dropped from player
+    GameObject[] droppedCubes = new GameObject[this.DroppedCubeThrash.transform.childCount];
     for (int i = 0; i < this.DroppedCubeThrash.transform.childCount; i++)
     {
+      droppedCubes[i] = this.DroppedCubeThrash.transform.GetChild(i).gameObject;
+    }
+    for (int i = 0; i < droppedCubes.Length; i++)
+    {
       // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
-      CubePool.Instance.Pool.Release(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
-      // TODO: return to pool is not working while destroy is working
+      CubePool.Instance.Pool.Release(droppedCubes[i]);
     }
   }
 
@@ -71,9 +75,7 @@ public class TrackSegment : MonoBehaviour
     {
       float x = transform.position.x + (i * partEveryLength) + partOffset;
 
-      SegmentPart segmentPart = SegmentPartPool.Instance.Pool.Get().GetComponent<SegmentPart>();
-      segmentPart.transform.SetPositionAndRotation(new Vector3(x, 0, 0), Quaternion.identity);
-
+      SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
       segmentPart.transform.SetParent(transform);
       segmentParts[i] = segmentPart;
 

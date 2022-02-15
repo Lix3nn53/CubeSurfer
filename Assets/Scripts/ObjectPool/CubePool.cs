@@ -3,23 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class CubePool : MonoBehaviour
+public class CubePool : Singleton<CubePool>
 {
-  public static CubePool Instance;
-  void Awake()
-  {
-    if (Instance != null)
-    {
-      Destroy(gameObject);
-      return;
-    }
-    else
-    {
-      Instance = this;
-    }
-  }
-
-  public GameObject cubePrefab;
+  [SerializeField] private GameObject cubePrefab;
   public enum PoolType
   {
     Stack,
@@ -60,6 +46,7 @@ public class CubePool : MonoBehaviour
   void OnReturnedToPool(GameObject go)
   {
     go.SetActive(false);
+    go.transform.SetParent(transform);
   }
 
   // Called when an item is taken from the pool using Get

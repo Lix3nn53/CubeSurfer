@@ -3,23 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SegmentPartPool : MonoBehaviour
+public class ObstaclePool : Singleton<ObstaclePool>
 {
-  public static SegmentPartPool Instance;
-  void Awake()
-  {
-    if (Instance != null)
-    {
-      Destroy(gameObject);
-      return;
-    }
-    else
-    {
-      Instance = this;
-    }
-  }
 
-  public GameObject segmentPartPrefab;
+  [SerializeField] private GameObject obstaclePrefab;
   public enum PoolType
   {
     Stack,
@@ -51,7 +38,7 @@ public class SegmentPartPool : MonoBehaviour
 
   GameObject CreatePooledItem()
   {
-    GameObject go = Instantiate(segmentPartPrefab);
+    GameObject go = Instantiate(obstaclePrefab);
 
     return go;
   }
@@ -67,7 +54,7 @@ public class SegmentPartPool : MonoBehaviour
   {
     if (go == null)
     {
-      Debug.LogError("SegmentPartPool: Trying to take an item from the pool that is null");
+      Debug.LogError("ObstaclePool: Trying to take an item from the pool that is null");
       return;
     }
 

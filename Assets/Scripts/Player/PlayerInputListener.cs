@@ -1,34 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
-public class PlayerInputListener : MonoBehaviour
+public class PlayerInputListener : Singleton<PlayerInputListener>
 {
-    public static PlayerInputListener Instance;
-    private PlayerMovement controller;
+  private PlayerMovement controller;
 
-    private void Awake() {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else
-        {
-            Instance = this;
-        }
+  protected override void Awake()
+  {
+    base.Awake();
+    this.controller = GetComponent<PlayerMovement>();
+  }
 
-        this.controller = GetComponent<PlayerMovement>();
-    }
-
-    public void OnMovement(InputAction.CallbackContext context)
+  public void OnMovement(InputAction.CallbackContext context)
+  {
+    if (context.performed)
     {
-        if (context.performed) {
-            Vector2 movement = context.ReadValue<Vector2>();
-            this.controller.OnMovementInput(movement.x);
-        } else if (context.canceled) {
-            this.controller.OnMovementInput(0f);
-        }
+      Vector2 movement = context.ReadValue<Vector2>();
+      this.controller.OnMovementInput(movement.x);
     }
+    else if (context.canceled)
+    {
+      this.controller.OnMovementInput(0f);
+    }
+  }
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackManager : MonoBehaviour
+public class TrackManager : Singleton<TrackManager>
 {
-  public static TrackManager Instance;
 
   [Header("TrackSegment")]
+  public GameObject SegmentPartPrefab;
   public float SegmentLength = 50;
 
   [Header("BetweenParts")]
@@ -15,24 +15,15 @@ public class TrackManager : MonoBehaviour
   public int CubeDistanceBetween = 4;
 
   [Header("Obstacle")]
-  public GameObject ObstaclePrefab;
   public float ObstacleStartHeight = 0.5f;
 
   private TrackSegment[] segmentPrefabs;
 
   private TrackSegment[] segmentBuffer;
 
-  private void Awake()
+  protected override void Awake()
   {
-    if (Instance != null)
-    {
-      Destroy(gameObject);
-      return;
-    }
-    else
-    {
-      Instance = this;
-    }
+    base.Awake();
 
     // Init prefabs
     this.segmentPrefabs = new TrackSegment[transform.childCount];
