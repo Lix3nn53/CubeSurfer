@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour
 
   private void Start()
   {
-    InputListener.Instance.OnMovement += OnMovementInput;
+    InputListener.Instance.ActionMove.performed += OnMovementInputPerformed;
   }
 
   public void Load(int sceneIndex)
@@ -69,11 +69,8 @@ public class SceneLoader : MonoBehaviour
 
 
 
-  private void OnMovementInput(InputAction.CallbackContext context)
+  private void OnMovementInputPerformed(InputAction.CallbackContext context)
   {
-    if (context.performed)
-    {
-      buttonPressed = true;
-    }
+    buttonPressed = true;
   }
 }

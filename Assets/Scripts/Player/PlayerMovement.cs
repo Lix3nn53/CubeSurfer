@@ -20,7 +20,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
   private void Start()
   {
-    InputListener.Instance.OnMovement += OnMovementInput;
+    InputListener.Instance.ActionMove.performed += OnMovementInputPerformed;
+    InputListener.Instance.ActionMove.canceled += OnMovementInputCanceled;
   }
 
   private void FixedUpdate()
@@ -68,7 +69,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     rigidbody.velocity = new Vector3(0, 0, 0);
   }
 
-  private void OnMovementInput(InputAction.CallbackContext context)
+  private void OnMovementInputPerformed(InputAction.CallbackContext context)
+  {
+    Vector2 movement = context.ReadValue<Vector2>();
+    this.OnMovement(movement.x);
+  }
+
+  private void OnMovementInputCanceled(InputAction.CallbackContext context)
   {
     if (context.performed)
     {

@@ -6,16 +6,14 @@ using UnityEngine.InputSystem;
 public class InputListener : Singleton<InputListener>
 {
 
-  // todo delegate
-  public delegate void OnMovementInput(InputAction.CallbackContext context);
+  private PlayerInput playerInput;
+  public InputAction ActionMove;
 
-  public event OnMovementInput OnMovement;
-
-  public void OnMovementAction(InputAction.CallbackContext context)
+  protected override void Awake()
   {
-    if (OnMovement != null)
-    {
-      OnMovement(context);
-    }
+    base.Awake();
+    playerInput = GetComponent<PlayerInput>();
+
+    ActionMove = playerInput.currentActionMap.FindAction("Move");
   }
 }
