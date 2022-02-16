@@ -59,7 +59,7 @@ public class SceneLoader : MonoBehaviour
         //Wait to you press the space key to activate the Scene
         if (buttonPressed)
           //Activate the Scene
-          operation.allowSceneActivation = true;
+          operation.allowSceneActivation = true; // operation is not done until this line is executed
       }
 
       Debug.Log(progress);
