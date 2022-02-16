@@ -8,6 +8,7 @@ public class InputListener : Singleton<InputListener>
 
   private PlayerInput playerInput;
   public InputAction ActionMove;
+  public InputAction ActionPause;
 
   protected override void Awake()
   {
@@ -15,5 +16,7 @@ public class InputListener : Singleton<InputListener>
     playerInput = GetComponent<PlayerInput>();
 
     ActionMove = playerInput.currentActionMap.FindAction("Move");
+
+    ActionPause = playerInput.currentActionMap.FindAction("Pause");
   }
 }

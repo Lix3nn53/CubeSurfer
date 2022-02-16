@@ -1,21 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class StateMachine
+public abstract class StateMachine : Singleton<StateMachine>
 {
-  private IState currentState;
+  public IState CurrentState { get; private set; }
 
   public void ChangeState(IState newState)
   {
-    if (currentState != null)
-      currentState.Exit();
+    Debug.Log("Changing state");
+    if (CurrentState != null)
+    {
+      Debug.Log("from " + CurrentState.GetType().Name);
+      CurrentState.Exit();
+    }
 
-    currentState = newState;
-    currentState.Enter();
+    CurrentState = newState;
+
+    if (CurrentState != null)
+    {
+      Debug.Log(" to " + newState.GetType().Name);
+      CurrentState.Enter();
+    }
   }
 
-  public void Update()
+  protected virtual void Update()
   {
-    if (currentState != null) currentState.Execute();
+    if (CurrentState != null)
+    {
+      CurrentState.Execute();
+    }
   }
 }
