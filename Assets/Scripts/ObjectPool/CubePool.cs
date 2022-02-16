@@ -15,6 +15,5 @@ public class CubePool : GameObjectPool
     base.OnTakeFromPool(go);
 
     go.AddComponent<Cube>();
-    Debug.Log("CubePool: OnTakeFromPool");
   }
 }
