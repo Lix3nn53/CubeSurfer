@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : Singleton<PlayerMovement>
 {
@@ -15,6 +16,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
   {
     base.Awake();
     rigidbody = GetComponent<Rigidbody>();
+  }
+
+  private void Start()
+  {
+    InputListener.Instance.OnMovement += OnMovementInput;
   }
 
   private void FixedUpdate()
@@ -51,7 +57,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
   }
 
-  public void OnMovementInput(float movement)
+  public void OnMovement(float movement)
   {
     this.movementInput = movement;
   }
@@ -60,5 +66,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
   {
     this.isRunning = false;
     rigidbody.velocity = new Vector3(0, 0, 0);
+  }
+
+  private void OnMovementInput(InputAction.CallbackContext context)
+  {
+    if (context.performed)
+    {
+      Vector2 movement = context.ReadValue<Vector2>();
+      this.OnMovement(movement.x);
+    }
+    else if (context.canceled)
+    {
+      this.OnMovement(0f);
+    }
   }
 }

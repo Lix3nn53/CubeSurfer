@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class SceneLoader : MonoBehaviour
@@ -9,6 +10,13 @@ public class SceneLoader : MonoBehaviour
   [SerializeField] private GameObject loadingScreen;
   [SerializeField] private Slider slider;
   [SerializeField] private TMP_Text percentText;
+
+  private bool buttonPressed = false;
+
+  private void Start()
+  {
+    InputListener.Instance.OnMovement += OnMovementInput;
+  }
 
   public void Load(int sceneIndex)
   {
@@ -24,6 +32,10 @@ public class SceneLoader : MonoBehaviour
 
     AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+    //Don't let the Scene activate until you allow it to
+    operation.allowSceneActivation = false;
+
+    //When the load is still in progress, output the Text and progress bar
     while (!operation.isDone)
     {
       // Loading = 0 - 0.9
@@ -39,11 +51,29 @@ public class SceneLoader : MonoBehaviour
         percentText.text = progress * 100f + "%";
       }
 
-      float percent = Mathf.Lerp(0, 100, progress);
+      // Check if the load has finished
+      if (operation.progress >= 0.9f)
+      {
+        //Change the Text to show the Scene is ready
+        percentText.text = "Press the space bar to continue";
+        //Wait to you press the space key to activate the Scene
+        if (buttonPressed)
+          //Activate the Scene
+          operation.allowSceneActivation = true;
+      }
 
       Debug.Log(progress);
-      Debug.Log(percent);
       yield return null;
+    }
+  }
+
+
+
+  private void OnMovementInput(InputAction.CallbackContext context)
+  {
+    if (context.performed)
+    {
+      buttonPressed = true;
     }
   }
 }

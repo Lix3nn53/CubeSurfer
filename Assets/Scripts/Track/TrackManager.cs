@@ -28,10 +28,9 @@ public class TrackManager : Singleton<TrackManager>
   #endregion
 
   #region Unity Methods
-  protected override void Awake()
-  {
-    base.Awake();
 
+  private void Start()
+  {
     // Init prefabs
     this.segmentPrefabs = new TrackSegment[transform.childCount];
     for (int i = 0; i < segmentPrefabs.Length; i++)
