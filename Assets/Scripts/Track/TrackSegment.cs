@@ -1,109 +1,113 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lix.Core;
 
-public class TrackSegment : MonoBehaviour
+namespace Lix.CubeRunner
 {
-  public GameObject DroppedCubeThrash;
-  private int partEveryLength;
-  private int partOffset;
-  private int partCount;
-
-  private SegmentPart[] segmentParts;
-
-  // BetweenParts
-  private BetweenParts[] betweenPartsArray;
-
-  private void clear()
+  public class TrackSegment : MonoBehaviour
   {
-    if (segmentParts != null)
-    {
-      for (int i = 0; i < segmentParts.Length; i++)
-      {
-        if (segmentParts[i] == null)
-        {
-          continue;
-        }
+    public GameObject DroppedCubeThrash;
+    private int partEveryLength;
+    private int partOffset;
+    private int partCount;
 
-        Destroy(segmentParts[i].gameObject);
+    private SegmentPart[] segmentParts;
+
+    // BetweenParts
+    private BetweenParts[] betweenPartsArray;
+
+    private void clear()
+    {
+      if (segmentParts != null)
+      {
+        for (int i = 0; i < segmentParts.Length; i++)
+        {
+          if (segmentParts[i] == null)
+          {
+            continue;
+          }
+
+          Destroy(segmentParts[i].gameObject);
+        }
+      }
+
+      // remove uncollected cubes
+      if (betweenPartsArray != null)
+      {
+        for (int i = 0; i < betweenPartsArray.Length; i++)
+        {
+          if (betweenPartsArray[i] == null)
+          {
+            continue;
+          }
+
+          // Destroy(betweenPartsArray[i].gameObject);
+          betweenPartsArray[i].returnCubesAndDestroySelf();
+        }
+      }
+
+      // remove cubes dropped from player
+      GameObject[] droppedCubes = new GameObject[this.DroppedCubeThrash.transform.childCount];
+      for (int i = 0; i < this.DroppedCubeThrash.transform.childCount; i++)
+      {
+        droppedCubes[i] = this.DroppedCubeThrash.transform.GetChild(i).gameObject;
+      }
+      for (int i = 0; i < droppedCubes.Length; i++)
+      {
+        // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
+        PoolManager.Get("CubePool").Pool.Release(droppedCubes[i]);
       }
     }
 
-    // remove uncollected cubes
-    if (betweenPartsArray != null)
+    private void randomize()
     {
-      for (int i = 0; i < betweenPartsArray.Length; i++)
+      partCount = UnityEngine.Random.Range(2, 4);
+      partEveryLength = (int)TrackManager.Instance.SegmentLength / partCount;
+      partOffset = (int)TrackManager.Instance.SegmentLength % partCount;
+
+      segmentParts = new SegmentPart[partCount];
+      betweenPartsArray = new BetweenParts[partCount + 1];
+    }
+
+    private void generate()
+    {
+      float previousX = transform.position.x;
+
+      for (int i = 0; i < partCount; i++)
       {
-        if (betweenPartsArray[i] == null)
-        {
-          continue;
-        }
+        float x = transform.position.x + (i * partEveryLength) + partOffset;
 
-        // Destroy(betweenPartsArray[i].gameObject);
-        betweenPartsArray[i].returnCubesAndDestroySelf();
+        SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
+        segmentPart.transform.SetParent(transform);
+        segmentParts[i] = segmentPart;
+
+        BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
+        betweenParts.transform.SetParent(transform);
+        betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x, UnityEngine.Random.Range(0, 5));
+        betweenPartsArray[i] = betweenParts;
+
+        previousX = x;
       }
+
+      // Cubes from last part until end of segment
+      BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
+      betweenPartss.transform.SetParent(transform);
+      betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength, UnityEngine.Random.Range(0, 5));
+      betweenPartsArray[partCount] = betweenPartss;
     }
 
-    // remove cubes dropped from player
-    GameObject[] droppedCubes = new GameObject[this.DroppedCubeThrash.transform.childCount];
-    for (int i = 0; i < this.DroppedCubeThrash.transform.childCount; i++)
+    public void OnStart()
     {
-      droppedCubes[i] = this.DroppedCubeThrash.transform.GetChild(i).gameObject;
+      randomize();
+      generate();
     }
-    for (int i = 0; i < droppedCubes.Length; i++)
+
+    public void OnRestart()
     {
-      // Destroy(this.DroppedCubeThrash.transform.GetChild(i).gameObject);
-      PoolManager.Get("CubePool").Pool.Release(droppedCubes[i]);
+      clear();
+      randomize();
+      generate();
     }
-  }
-
-  private void randomize()
-  {
-    partCount = UnityEngine.Random.Range(2, 4);
-    partEveryLength = (int)TrackManager.Instance.SegmentLength / partCount;
-    partOffset = (int)TrackManager.Instance.SegmentLength % partCount;
-
-    segmentParts = new SegmentPart[partCount];
-    betweenPartsArray = new BetweenParts[partCount + 1];
-  }
-
-  private void generate()
-  {
-    float previousX = transform.position.x;
-
-    for (int i = 0; i < partCount; i++)
-    {
-      float x = transform.position.x + (i * partEveryLength) + partOffset;
-
-      SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
-      segmentPart.transform.SetParent(transform);
-      segmentParts[i] = segmentPart;
-
-      BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
-      betweenParts.transform.SetParent(transform);
-      betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x, UnityEngine.Random.Range(0, 5));
-      betweenPartsArray[i] = betweenParts;
-
-      previousX = x;
-    }
-
-    // Cubes from last part until end of segment
-    BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
-    betweenPartss.transform.SetParent(transform);
-    betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength, UnityEngine.Random.Range(0, 5));
-    betweenPartsArray[partCount] = betweenPartss;
-  }
-
-  public void OnStart()
-  {
-    randomize();
-    generate();
-  }
-
-  public void OnRestart()
-  {
-    clear();
-    randomize();
-    generate();
   }
 }

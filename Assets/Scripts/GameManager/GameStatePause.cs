@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lix.Core;
 
-public class GameStatePause : IState
+namespace Lix.CubeRunner
 {
-  public void Enter()
+  public class GameStatePause : IState
   {
-    Pause();
-  }
+    public void Enter()
+    {
+      Pause();
+    }
 
-  public void Execute()
-  {
+    public void Execute()
+    {
 
-  }
+    }
 
-  public void Exit()
-  {
-    Resume();
-  }
+    public void Exit()
+    {
+      Resume();
+    }
 
-  public void Pause()
-  {
-    Time.timeScale = 0f;
-    PauseMenu.Instance.PauseMenuPanel.SetActive(true);
-  }
+    public void Pause()
+    {
+      Time.timeScale = 0f;
+      PauseMenu.Instance.PauseMenuPanel.SetActive(true);
+    }
 
-  public void Resume()
-  {
-    Time.timeScale = 1f;
-    PauseMenu.Instance.PauseMenuPanel.SetActive(false);
+    public void Resume()
+    {
+      Time.timeScale = 1f;
+      PauseMenu.Instance.PauseMenuPanel.SetActive(false);
+    }
   }
 }

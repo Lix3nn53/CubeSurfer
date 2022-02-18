@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Lix.Core;
 
-public class InputListener : Singleton<InputListener>
+namespace Lix.CubeRunner
 {
-
-  private PlayerInput playerInput;
-  public InputAction ActionMove;
-  public InputAction ActionPause;
-
-  protected override void Awake()
+  public class InputListener : Singleton<InputListener>
   {
-    base.Awake();
-    playerInput = GetComponent<PlayerInput>();
 
-    ActionMove = playerInput.currentActionMap.FindAction("Move");
+    private PlayerInput playerInput;
+    public InputAction ActionMove;
+    public InputAction ActionPause;
 
-    ActionPause = playerInput.currentActionMap.FindAction("Pause");
+    protected override void Awake()
+    {
+      base.Awake();
+      playerInput = GetComponent<PlayerInput>();
+
+      ActionMove = playerInput.currentActionMap.FindAction("Move");
+
+      ActionPause = playerInput.currentActionMap.FindAction("Pause");
+    }
   }
 }

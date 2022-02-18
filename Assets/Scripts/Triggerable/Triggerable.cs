@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Triggerable : MonoBehaviour
+namespace Lix.CubeRunner
 {
-    
-    public virtual void OnTriggerEnter(Collider other) {
-        this.OnTrigger(other);
+  public class Triggerable : MonoBehaviour
+  {
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+      this.OnTrigger(other);
     }
 
-    public virtual void OnTrigger(Collider other) {
+    public virtual void OnTrigger(Collider other)
+    {
 
     }
+  }
 }

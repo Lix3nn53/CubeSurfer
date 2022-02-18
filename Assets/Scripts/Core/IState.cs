@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public interface IState
+namespace Lix.Core
 {
-  public void Enter();
-  public void Execute();
-  public void Exit();
+  public interface IState
+  {
+    public void Enter();
+    public void Execute();
+    public void Exit();
+  }
 }

@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lix.Core;
 
-public class GameStatePlay : IState
+namespace Lix.CubeRunner
 {
-  public void Enter()
+  public class GameStatePlay : IState
   {
+    public void Enter()
+    {
 
-  }
+    }
 
-  public void Execute()
-  {
+    public void Execute()
+    {
 
-  }
+    }
 
-  public void Exit()
-  {
+    public void Exit()
+    {
 
+    }
   }
 }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Lix.Core;
 
-public class PauseMenu : Singleton<PauseMenu>
+namespace Lix.CubeRunner
 {
-  public GameObject PauseMenuPanel;
+  public class PauseMenu : Singleton<PauseMenu>
+  {
+    public GameObject PauseMenuPanel;
 
+  }
 }

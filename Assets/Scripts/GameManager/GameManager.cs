@@ -2,27 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Lix.Core;
 
-public class GameManager : StateMachine
+namespace Lix.CubeRunner
 {
-  private void Start()
+  public class GameManager : StateMachine
   {
-    ChangeState(new GameStatePlay());
-
-    InputListener.Instance.ActionPause.performed += OnPauseInputPerformed;
-  }
-
-  private void OnPauseInputPerformed(InputAction.CallbackContext context)
-  {
-
-    if (CurrentState is GameStatePause)
+    private void Start()
     {
       ChangeState(new GameStatePlay());
-    }
-    else
-    {
-      ChangeState(new GameStatePause());
-    }
-  }
 
+      InputListener.Instance.ActionPause.performed += OnPauseInputPerformed;
+    }
+
+    private void OnPauseInputPerformed(InputAction.CallbackContext context)
+    {
+
+      if (CurrentState is GameStatePause)
+      {
+        ChangeState(new GameStatePlay());
+      }
+      else
+      {
+        ChangeState(new GameStatePause());
+      }
+    }
+
+  }
 }

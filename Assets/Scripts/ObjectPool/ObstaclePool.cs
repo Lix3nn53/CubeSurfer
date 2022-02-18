@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Lix.Core;
 
-public class ObstaclePool : GameObjectPool
+namespace Lix.CubeRunner
 {
-  protected override void Awake()
+  public class ObstaclePool : GameObjectPool
   {
-    PoolManager.Add(this.GetType().Name, this);
+    protected override void Awake()
+    {
+      PoolManager.Add(this.GetType().Name, this);
+    }
   }
 }

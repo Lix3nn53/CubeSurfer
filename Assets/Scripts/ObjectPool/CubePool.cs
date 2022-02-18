@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Lix.Core;
 
-public class CubePool : GameObjectPool
+namespace Lix.CubeRunner
 {
-  protected override void Awake()
+  public class CubePool : GameObjectPool
   {
-    PoolManager.Add(this.GetType().Name, this);
-  }
+    protected override void Awake()
+    {
+      PoolManager.Add(this.GetType().Name, this);
+    }
 
-  protected override void OnTakeFromPool(GameObject go)
-  {
-    base.OnTakeFromPool(go);
+    protected override void OnTakeFromPool(GameObject go)
+    {
+      base.OnTakeFromPool(go);
 
-    go.AddComponent<Cube>();
+      go.AddComponent<Cube>();
+    }
   }
 }

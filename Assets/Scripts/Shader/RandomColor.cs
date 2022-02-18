@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomColor : MonoBehaviour
+namespace Lix.CubeRunner
 {
-    private void Awake() {
-        MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
-        Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+  public class RandomColor : MonoBehaviour
+  {
+    private void Awake()
+    {
+      MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+      Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+      materialPropertyBlock.SetColor("_BaseColor", randomColor);
+
+      Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+      foreach (Renderer renderer in renderers)
+      {
         materialPropertyBlock.SetColor("_BaseColor", randomColor);
-
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-
-        foreach (Renderer renderer in renderers) {
-            materialPropertyBlock.SetColor("_BaseColor", randomColor);
-            renderer.SetPropertyBlock(materialPropertyBlock);
-        }
+        renderer.SetPropertyBlock(materialPropertyBlock);
+      }
     }
+  }
 }
