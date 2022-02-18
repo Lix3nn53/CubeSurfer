@@ -3,15 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Lix.CubeRunner
+namespace Lix.IoC
 {
   public class GreetingConsumer : MonoBehaviour
   {
-    [Inject] private IGreeting greeting;
+    public bool IsGoodbye = false;
+    private IGreeting greeting;
+
+    [Inject]
+    private void Init(IGreeting greeting)
+    {
+      this.greeting = greeting;
+    }
 
     private void Update()
     {
-      greeting.Greet();
+      if (IsGoodbye)
+      {
+        Debug.Log("Goodbye!", gameObject);
+      }
+      else
+      {
+        greeting.Greet(gameObject);
+      }
+    }
+
+    public class Factory : PlaceholderFactory<GreetingConsumer>
+    {
     }
   }
+
+
 }

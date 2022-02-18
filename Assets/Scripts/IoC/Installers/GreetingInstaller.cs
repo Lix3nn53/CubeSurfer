@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
-public class GreetingInstaller : MonoInstaller<GreetingInstaller>
+namespace Lix.IoC
 {
-  public override void InstallBindings()
+  public class GreetingInstaller : MonoInstaller<GreetingInstaller>
   {
-    Container.Bind<IGreeting>().To<Greeting>().AsSingle();
+    [SerializeField] private GreetingConsumer greetingConsumerPrefab;
+    public override void InstallBindings()
+    {
+      // Container.Bind<IGreeting>().To<Greeting>().AsSingle().NonLazy();
+      Container.Bind<IGreeting>().To<Greeting>().FromFactory<Greeting.Factory>().AsSingle().NonLazy();
+
+      Container.BindFactory<GreetingConsumer, GreetingConsumer.Factory>().FromComponentInNewPrefab(greetingConsumerPrefab);
+    }
   }
 }

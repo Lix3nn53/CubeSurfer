@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGreeting
+namespace Lix.IoC
 {
-  void Greet();
+  public interface IGreeting
+  {
+    void Greet(GameObject gameObject);
+  }
 }
