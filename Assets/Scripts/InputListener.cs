@@ -6,21 +6,34 @@ using Lix.Core;
 
 namespace Lix.CubeRunner
 {
-  public class InputListener : Singleton<InputListener>
+  [RequireComponent(typeof(PlayerInput))]
+  public class InputListener : MonoBehaviour, IInputListener
   {
 
     private PlayerInput playerInput;
-    public InputAction ActionMove;
-    public InputAction ActionPause;
+    private InputAction ActionMove;
+    private InputAction ActionPause;
 
-    protected override void Awake()
+    private void Awake()
     {
-      base.Awake();
       playerInput = GetComponent<PlayerInput>();
 
       ActionMove = playerInput.currentActionMap.FindAction("Move");
 
       ActionPause = playerInput.currentActionMap.FindAction("Pause");
+    }
+
+    public InputAction GetAction(InputActionType type)
+    {
+      switch (type)
+      {
+        case InputActionType.Move:
+          return ActionMove;
+        case InputActionType.Pause:
+          return ActionPause;
+        default:
+          return null;
+      }
     }
   }
 }

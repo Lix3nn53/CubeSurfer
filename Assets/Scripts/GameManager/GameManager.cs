@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
@@ -12,7 +13,9 @@ namespace Lix.CubeRunner
     {
       ChangeState(new GameStatePlay());
 
-      InputListener.Instance.ActionPause.performed += OnPauseInputPerformed;
+      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
+
+      inputListener.GetAction(InputActionType.Pause).performed += OnPauseInputPerformed;
     }
 
     private void OnPauseInputPerformed(InputAction.CallbackContext context)

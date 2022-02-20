@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Lix.Core;
 
 namespace Lix.CubeRunner
 {
-  public class PauseMenu : MonoBehaviour
+  public enum InputActionType { Move, Pause }
+  public interface IInputListener
   {
-    public GameObject PauseMenuPanel;
-
+    InputAction GetAction(InputActionType type);
   }
 }

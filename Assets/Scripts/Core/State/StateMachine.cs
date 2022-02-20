@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lix.Core
 {
-  public abstract class StateMachine : Singleton<StateMachine>
+  public abstract class StateMachine : MonoBehaviour
   {
     public IState CurrentState { get; private set; }
 

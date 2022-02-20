@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
-  public class PlayerMovement : Singleton<PlayerMovement>
+  public class PlayerMovement : MonoBehaviour
   {
     [SerializeField] private float speedForward = 200;
     [SerializeField] private float speedSideways = 300;
@@ -15,16 +16,18 @@ namespace Lix.CubeRunner
 
     private float movementInput;
 
-    protected override void Awake()
+    private void Awake()
     {
-      base.Awake();
       rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-      InputListener.Instance.ActionMove.performed += OnMovementInputPerformed;
-      InputListener.Instance.ActionMove.canceled += OnMovementInputCanceled;
+      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
+
+      InputAction moveAction = inputListener.GetAction(InputActionType.Move);
+      moveAction.performed += OnMovementInputPerformed;
+      moveAction.canceled += OnMovementInputCanceled;
     }
 
     private void FixedUpdate()

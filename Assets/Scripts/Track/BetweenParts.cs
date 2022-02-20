@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
   public class BetweenParts : MonoBehaviour
   {
-    public void generate(float start, float end, float z)
+    public void generate(float start, float end, float z, int cubeLength, int cubeDistanceBetween)
     {
-      for (float cubeX = start; cubeX < end; cubeX += TrackManager.Instance.CubeLength + TrackManager.Instance.CubeDistanceBetween)
+      for (float cubeX = start; cubeX < end; cubeX += cubeLength + cubeDistanceBetween)
       {
         int randomHeight = UnityEngine.Random.Range(1, 4);
 

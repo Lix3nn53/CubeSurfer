@@ -9,10 +9,6 @@ namespace Lix.IoC
   {
     private string name = "Lix3nn";
 
-    public Greeting()
-    {
-    }
-
     public Greeting(string name)
     {
       this.name = name;

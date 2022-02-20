@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
@@ -60,17 +61,17 @@ namespace Lix.CubeRunner
       }
     }
 
-    private void randomize()
+    private void randomize(float segmentLength)
     {
       partCount = UnityEngine.Random.Range(2, 4);
-      partEveryLength = (int)TrackManager.Instance.SegmentLength / partCount;
-      partOffset = (int)TrackManager.Instance.SegmentLength % partCount;
+      partEveryLength = (int)segmentLength / partCount;
+      partOffset = (int)segmentLength % partCount;
 
       segmentParts = new SegmentPart[partCount];
       betweenPartsArray = new BetweenParts[partCount + 1];
     }
 
-    private void generate()
+    private void generate(GameObject segmentPartPrefab, GameObject betweenPartsPrefab, int cubeLength, int cubeDistanceBetween, float segmentLength)
     {
       float previousX = transform.position.x;
 
@@ -78,36 +79,36 @@ namespace Lix.CubeRunner
       {
         float x = transform.position.x + (i * partEveryLength) + partOffset;
 
-        SegmentPart segmentPart = Instantiate(TrackManager.Instance.SegmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
+        SegmentPart segmentPart = Instantiate(segmentPartPrefab, new Vector3(x, 0, 0), Quaternion.identity).GetComponent<SegmentPart>();
         segmentPart.transform.SetParent(transform);
         segmentParts[i] = segmentPart;
 
-        BetweenParts betweenParts = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
+        BetweenParts betweenParts = Instantiate(betweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
         betweenParts.transform.SetParent(transform);
-        betweenParts.generate(previousX + TrackManager.Instance.CubeDistanceBetween, x, UnityEngine.Random.Range(0, 5));
+        betweenParts.generate(previousX + cubeDistanceBetween, x, UnityEngine.Random.Range(0, 5), cubeLength, cubeDistanceBetween);
         betweenPartsArray[i] = betweenParts;
 
         previousX = x;
       }
 
       // Cubes from last part until end of segment
-      BetweenParts betweenPartss = Instantiate(TrackManager.Instance.BetweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
+      BetweenParts betweenPartss = Instantiate(betweenPartsPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<BetweenParts>();
       betweenPartss.transform.SetParent(transform);
-      betweenPartss.generate(previousX + TrackManager.Instance.CubeDistanceBetween, transform.position.x + TrackManager.Instance.SegmentLength, UnityEngine.Random.Range(0, 5));
+      betweenPartss.generate(previousX + cubeDistanceBetween, transform.position.x + segmentLength, UnityEngine.Random.Range(0, 5), cubeLength, cubeDistanceBetween);
       betweenPartsArray[partCount] = betweenPartss;
     }
 
-    public void OnStart()
+    public void OnStart(GameObject segmentPartPrefab, GameObject betweenPartsPrefab, int cubeLength, int cubeDistanceBetween, float segmentLength)
     {
-      randomize();
-      generate();
+      randomize(segmentLength);
+      generate(segmentPartPrefab, betweenPartsPrefab, cubeLength, cubeDistanceBetween, segmentLength);
     }
 
-    public void OnRestart()
+    public void OnRestart(GameObject segmentPartPrefab, GameObject betweenPartsPrefab, int cubeLength, int cubeDistanceBetween, float segmentLength)
     {
       clear();
-      randomize();
-      generate();
+      randomize(segmentLength);
+      generate(segmentPartPrefab, betweenPartsPrefab, cubeLength, cubeDistanceBetween, segmentLength);
     }
   }
 }

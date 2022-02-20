@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
@@ -15,13 +16,22 @@ namespace Lix.CubeRunner
   /// - Obstacle
   /// - Crystal
   /// </summary>
-  public class PlayerCollider : Singleton<PlayerCollider>
+  public class PlayerCollider : MonoBehaviour
   {
     [SerializeField] private GameObject graphicsContainer;
     [SerializeField] private GameObject cubeContainer;
     [SerializeField] private GameObject playerGraphics;
     [SerializeField] private float heightPerCube = 1.0f;
     [SerializeField] private float jumpOnCollect = 0.2f;
+
+    private PlayerMovement playerMovement;
+    private TrackManager trackManager;
+
+    private void Start()
+    {
+      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
+    }
 
     public void OnCube(GameObject cube)
     {
@@ -75,7 +85,7 @@ namespace Lix.CubeRunner
       int count = this.cubeContainer.transform.childCount;
       if (count < requiredHeight || count <= toRemove.Count)
       { // Gameover if player is below required height or if player loses all cubes 
-        PlayerMovement.Instance.StopRunning();
+        playerMovement.StopRunning();
         Debug.Log("GAME OVER");
         return;
       }
@@ -84,7 +94,7 @@ namespace Lix.CubeRunner
       foreach (int i in toRemove)
       {
         GameObject cubeToRemove = this.cubeContainer.transform.GetChild(lastIndex - i).gameObject;
-        cubeToRemove.transform.SetParent(TrackManager.Instance.GetCurrentSegment().DroppedCubeThrash.transform); // Add dropped cube to thrash of current segment
+        cubeToRemove.transform.SetParent(trackManager.GetCurrentSegment().DroppedCubeThrash.transform); // Add dropped cube to thrash of current segment
         cubeToRemove.transform.localPosition = new Vector3((int)(cubeToRemove.transform.localPosition.x), cubeToRemove.transform.localPosition.y, cubeToRemove.transform.localPosition.z);
       }
     }

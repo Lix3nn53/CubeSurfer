@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
@@ -17,13 +18,28 @@ namespace Lix.CubeRunner
 
     [SerializeField] private ObstacleLine[][] lines;
 
+    // Dependencies
+    private PlayerCollider playerCollider;
+    private PlayerMovement playerMovement;
+    private TrackManager trackManager;
+
+    private void Start()
+    {
+      playerCollider = DependencyResolver.Container.Resolve<PlayerCollider>();
+      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
+
+      RandomShape();
+      // AutoFillLineData(); // Random Shape already fills the data
+    }
+
     public override void OnTrigger(Collider other)
     {
       var go = other.gameObject;
       if (go == null || !other.gameObject.CompareTag("Player"))
         return;
 
-      float line = PlayerMovement.Instance.gameObject.transform.localPosition.z;
+      float line = playerMovement.gameObject.transform.localPosition.z;
 
       int indexMin = (int)(line);
       int indexMax = (int)(line + hitBoxWidth);
@@ -47,34 +63,8 @@ namespace Lix.CubeRunner
         y.CopyTo(parts, x.Length);
       }
 
-      PlayerCollider.Instance.OnObstacle(parts);
+      playerCollider.OnObstacle(parts);
     }
-
-    void Awake()
-    {
-      RandomShape();
-      // AutoFillLineData(); // Random Shape already fills the data
-    }
-
-    //   private void AutoFillLineData()
-    //   {
-    //     lines = new ObstacleLine[5][];
-    //     for (int i = 0; i < 5; i++)
-    //     {
-    //       Transform obstacleLine = transform.GetChild(i);
-    //       int lineIndex = (int)obstacleLine.localPosition.z + 2;
-
-    //       int obstacleCount = obstacleLine.childCount;
-    //       lines[i] = new ObstacleLine[obstacleCount];
-    //       for (int y = 0; y < obstacleCount; y++)
-    //       {
-    //         Transform obstacle = obstacleLine.GetChild(y);
-
-    //         ObstacleLine obstaclePart = new ObstacleLine() { start = (int)obstacle.localPosition.y, height = (int)obstacle.localScale.y };
-    //         lines[i][y] = obstaclePart;
-    //       }
-    //     }
-    //   }
 
     public void RandomShape()
     {
@@ -86,7 +76,7 @@ namespace Lix.CubeRunner
         int obstacleCount = UnityEngine.Random.Range(0, 4);
         lines[i] = new ObstacleLine[obstacleCount]; // Save data
 
-        float startHeight = TrackManager.Instance.ObstacleStartHeight;
+        float startHeight = trackManager.ObstacleStartHeight;
         for (int y = 0; y < obstacleCount; y++)
         {
           GameObject obstacle = PoolManager.Get("ObstaclePool").Pool.Get();

@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
+using Autofac;
 
 namespace Lix.CubeRunner
 {
   public class GameStatePause : IState
   {
+    private PauseMenu pauseMenu;
+
+    public GameStatePause()
+    {
+      pauseMenu = DependencyResolver.Container.Resolve<PauseMenu>();
+    }
+
     public void Enter()
     {
       Pause();
@@ -25,13 +33,13 @@ namespace Lix.CubeRunner
     public void Pause()
     {
       Time.timeScale = 0f;
-      PauseMenu.Instance.PauseMenuPanel.SetActive(true);
+      pauseMenu.PauseMenuPanel.SetActive(true);
     }
 
     public void Resume()
     {
       Time.timeScale = 1f;
-      PauseMenu.Instance.PauseMenuPanel.SetActive(false);
+      pauseMenu.PauseMenuPanel.SetActive(false);
     }
   }
 }

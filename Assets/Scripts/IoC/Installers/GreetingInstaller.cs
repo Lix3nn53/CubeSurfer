@@ -7,13 +7,17 @@ namespace Lix.IoC
 {
   public class GreetingInstaller : MonoInstaller<GreetingInstaller>
   {
-    [SerializeField] private GreetingConsumer greetingConsumerPrefab;
+
+    [Inject]
+    private GameSettings gameSettings;
+
     public override void InstallBindings()
     {
       // Container.Bind<IGreeting>().To<Greeting>().AsSingle().NonLazy();
-      Container.Bind<IGreeting>().To<Greeting>().FromFactory<Greeting.Factory>().AsSingle().NonLazy();
+      // Container.Bind<IGreeting>().To<Greeting>().FromFactory<Greeting.Factory>().AsSingle().NonLazy();
+      Container.Bind<IGreeting>().To<Greeting>().AsSingle().WithArguments("WITH ARGUMENTS").NonLazy();
 
-      Container.BindFactory<GreetingConsumer, GreetingConsumer.Factory>().FromComponentInNewPrefab(greetingConsumerPrefab);
+      Container.BindFactory<GreetingConsumer, GreetingConsumer.Factory>().FromComponentInNewPrefab(gameSettings.greetingConsumerPrefab);
     }
   }
 }
