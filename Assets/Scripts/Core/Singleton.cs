@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Lix.Core
 {
-  public abstract class Singletonn<T> : MonoBehaviour where T : Component
+  public abstract class Singleton<T> : MonoBehaviour where T : Component
   {
     public bool DontDestroy = false;
 

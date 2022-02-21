@@ -6,15 +6,13 @@ using Lix.CubeRunner;
 
 namespace Lix.IoC
 {
-  public class ContainerCore : IContainerRegister
+  public class ContainerCore : ContainerRegister
   {
     [SerializeField] private InputListener inputListener;
 
-    public void Register(ContainerBuilder builder)
+    public override void RegisterDependencies(ContainerBuilder builder)
     {
       builder.RegisterInstance(inputListener).As<IInputListener>().SingleInstance();
-
-      DependencyResolver.Container = builder.Build();
     }
   }
 }
