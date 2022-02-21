@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lix.Core;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -41,7 +41,7 @@ namespace Lix.CubeRunner
     private void Start()
     {
       // Init dependencies
-      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
+      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
 
       // Init prefabs
       this.segmentPrefabs = new TrackSegment[transform.childCount];

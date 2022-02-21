@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Lix.Core;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -25,9 +26,9 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DependencyResolver.Container.Resolve<PlayerCollider>();
-      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
-      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
+      playerCollider = DependencyResolver.ContainerGame.Resolve<PlayerCollider>();
+      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.ContainerGame.Resolve<TrackManager>();
 
       RandomShape();
       // AutoFillLineData(); // Random Shape already fills the data

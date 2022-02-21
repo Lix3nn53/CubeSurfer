@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -11,7 +12,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DependencyResolver.Container.Resolve<PlayerCollider>();
+      playerCollider = DependencyResolver.ContainerGame.Resolve<PlayerCollider>();
     }
 
     public override void OnTrigger(Collider other)

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lix.Core;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -29,8 +29,8 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
-      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
+      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.ContainerGame.Resolve<TrackManager>();
     }
 
     public void OnCube(GameObject cube)

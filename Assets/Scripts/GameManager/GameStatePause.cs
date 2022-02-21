@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -12,7 +13,7 @@ namespace Lix.CubeRunner
 
     public GameStatePause()
     {
-      pauseMenu = DependencyResolver.Container.Resolve<PauseMenu>();
+      pauseMenu = DependencyResolver.ContainerUI.Resolve<PauseMenu>();
     }
 
     public void Enter()

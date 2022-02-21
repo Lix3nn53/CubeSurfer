@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Lix.Core;
 using Autofac;
+using Lix.IoC;
 
 namespace Lix.CubeRunner
 {
@@ -23,7 +23,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
+      IInputListener inputListener = DependencyResolver.ContainerCore.Resolve<IInputListener>();
 
       InputAction moveAction = inputListener.GetAction(InputActionType.Move);
       moveAction.performed += OnMovementInputPerformed;

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e797409f40f7bb0459a2868e5dd6fc82, type: 3}
+  m_Name: New Bootstrapper Settings
+  m_EditorClassIdentifier: 
+  inputListener: {fileID: 0}
+  playerCollider: {fileID: 0}
+  playerMovement: {fileID: 0}
+  trackManager: {fileID: 0}
+  pauseMenu: {fileID: 0}
