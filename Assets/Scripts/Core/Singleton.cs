@@ -28,7 +28,7 @@ namespace Lix.Core
       {
         if (instance == null)
         {
-          Debug.LogWarning("GET SINGLETON NULL Instance of " + typeof(T));
+          Debug.LogWarning("GET SINGLETON BEFORE AWAKE, Instance of " + typeof(T));
         }
 
         return instance;

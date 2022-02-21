@@ -12,8 +12,6 @@ namespace Lix.IoC
     [SerializeReference] private ContainerRegister[] containerRegisters;
     private void Awake()
     {
-      Debug.Log("Container.Awake");
-
       ContainerBuilder builder = new ContainerBuilder();
 
       foreach (ContainerRegister containerRegister in containerRegisters)

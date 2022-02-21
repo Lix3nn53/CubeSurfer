@@ -122,8 +122,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0c0ceed4-8622-40d6-b085-83b61417b2be
     m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Touch
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -139,13 +139,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69e41169173947ebb9b105d03b36952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroy: 0
-  ActionMove:
-    m_Name: Action Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b807f2e4-6760-4d3d-9d89-0878b9e1366f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
