@@ -14,7 +14,7 @@ namespace Lix.CubeRunner
     {
       ChangeState(new GameStatePlay());
 
-      IInputListener inputListener = DependencyResolver.ContainerCore.Resolve<IInputListener>();
+      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
 
       inputListener.GetAction(InputActionType.Pause).performed += OnPauseInputPerformed;
     }

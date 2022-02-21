@@ -12,7 +12,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DependencyResolver.ContainerGame.Resolve<PlayerCollider>();
+      playerCollider = DependencyResolver.Container.Resolve<PlayerCollider>();
     }
 
     public override void OnTrigger(Collider other)

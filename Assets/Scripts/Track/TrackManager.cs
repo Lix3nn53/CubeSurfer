@@ -41,7 +41,7 @@ namespace Lix.CubeRunner
     private void Start()
     {
       // Init dependencies
-      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
+      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
 
       // Init prefabs
       this.segmentPrefabs = new TrackSegment[transform.childCount];

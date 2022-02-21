@@ -4,16 +4,14 @@ using Lix.CubeRunner;
 
 namespace Lix.IoC
 {
-  public class ContainerGame : MonoBehaviour
+  public class ContainerGame : IContainerRegister
   {
     [SerializeField] private PlayerCollider playerCollider;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private TrackManager trackManager;
 
-    private void Awake()
+    public void Register(ContainerBuilder builder)
     {
-      ContainerBuilder builder = new ContainerBuilder();
-
       builder.RegisterType<Hello>().As<IHello>();
       // builder.RegisterType<Hello>().As<IHello>().SingleInstance();
 
@@ -23,7 +21,7 @@ namespace Lix.IoC
 
       builder.RegisterInstance(trackManager).As<TrackManager>().SingleInstance();
 
-      DependencyResolver.ContainerGame = builder.Build();
+      DependencyResolver.Container = builder.Build();
     }
   }
 }

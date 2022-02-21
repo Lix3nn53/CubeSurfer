@@ -19,7 +19,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      IInputListener inputListener = DependencyResolver.ContainerCore.Resolve<IInputListener>();
+      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
 
       inputListener.GetAction(InputActionType.Move).performed += OnMovementInputPerformed;
     }

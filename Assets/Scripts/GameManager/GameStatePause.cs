@@ -13,7 +13,7 @@ namespace Lix.CubeRunner
 
     public GameStatePause()
     {
-      pauseMenu = DependencyResolver.ContainerUI.Resolve<PauseMenu>();
+      pauseMenu = DependencyResolver.Container.Resolve<PauseMenu>();
     }
 
     public void Enter()

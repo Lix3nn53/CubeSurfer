@@ -6,17 +6,15 @@ using Lix.CubeRunner;
 
 namespace Lix.IoC
 {
-  public class ContainerUI : MonoBehaviour
+  public class ContainerUI : IContainerRegister
   {
     [SerializeField] private PauseMenu pauseMenu;
 
-    void Awake()
+    public void Register(ContainerBuilder builder)
     {
-      ContainerBuilder builder = new ContainerBuilder();
-
       builder.RegisterInstance(pauseMenu).As<PauseMenu>().SingleInstance();
 
-      DependencyResolver.ContainerUI = builder.Build();
+      DependencyResolver.Container = builder.Build();
     }
   }
 }

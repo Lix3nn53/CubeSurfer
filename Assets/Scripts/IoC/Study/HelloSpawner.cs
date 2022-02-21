@@ -15,7 +15,7 @@ public class HelloSpawner : MonoBehaviour
     if (TimeSinceLastSpawn >= TimeBetweenSpawns)
     {
       TimeSinceLastSpawn = 0f;
-      DependencyResolver.ContainerGame.Resolve<IHello>();
+      DependencyResolver.Container.Resolve<IHello>();
     }
   }
 }

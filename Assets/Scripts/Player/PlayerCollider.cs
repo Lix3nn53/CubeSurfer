@@ -29,8 +29,8 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
-      trackManager = DependencyResolver.ContainerGame.Resolve<TrackManager>();
+      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
     }
 
     public void OnCube(GameObject cube)

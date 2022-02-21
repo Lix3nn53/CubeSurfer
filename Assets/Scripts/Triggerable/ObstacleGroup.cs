@@ -26,9 +26,9 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DependencyResolver.ContainerGame.Resolve<PlayerCollider>();
-      playerMovement = DependencyResolver.ContainerGame.Resolve<PlayerMovement>();
-      trackManager = DependencyResolver.ContainerGame.Resolve<TrackManager>();
+      playerCollider = DependencyResolver.Container.Resolve<PlayerCollider>();
+      playerMovement = DependencyResolver.Container.Resolve<PlayerMovement>();
+      trackManager = DependencyResolver.Container.Resolve<TrackManager>();
 
       RandomShape();
       // AutoFillLineData(); // Random Shape already fills the data

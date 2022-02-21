@@ -11,7 +11,7 @@ public class HelloConsumer : MonoBehaviour
 
   void Start()
   {
-    greeting = DependencyResolver.ContainerGame.Resolve<IHello>();
+    greeting = DependencyResolver.Container.Resolve<IHello>();
   }
 
   // Update is called once per frame
