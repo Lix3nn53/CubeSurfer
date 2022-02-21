@@ -4214,7 +4214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedForward: 700
-  speedSideways: 250
+  speedSideways: 500
 --- !u!54 &1713166337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4538,7 +4538,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7475345, y: 1}
+    m_SensorSize: {x: 0.6, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

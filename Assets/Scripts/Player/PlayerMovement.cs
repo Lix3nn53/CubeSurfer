@@ -77,6 +77,9 @@ namespace Lix.CubeRunner
 
     private void OnMovementInputPerformed(InputAction.CallbackContext context)
     {
+      // InputDevice device = context.control.device;
+      // Debug.Log($"{device.name} performed {context.control.name}");
+      // Debug.Log($"{device.description} performed {device.noisy}");
       Vector2 movement = context.ReadValue<Vector2>();
       this.OnMovement(movement.x);
     }
