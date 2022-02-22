@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Autofac;
 using Lix.IoC;
+using TMPro;
 
 namespace Lix.CubeRunner
 {
   public class PlayerMovement : MonoBehaviour
   {
+    [SerializeField] private TMP_Text inputDebugText;
     [SerializeField] private float speedForward = 200;
     [SerializeField] private float speedSideways = 300;
     private new Rigidbody rigidbody;
     private bool isRunning = true;
-
     private float movementInput;
 
     private void Awake()
@@ -77,11 +78,27 @@ namespace Lix.CubeRunner
 
     private void OnMovementInputPerformed(InputAction.CallbackContext context)
     {
-      // InputDevice device = context.control.device;
+      InputDevice device = context.control.device;
       // Debug.Log($"{device.name} performed {context.control.name}");
       // Debug.Log($"{device.description} performed {device.noisy}");
-      Vector2 movement = context.ReadValue<Vector2>();
-      this.OnMovement(movement.x);
+      Vector2 movementVector = context.ReadValue<Vector2>();
+
+      float movement = movementVector.x;
+      string debug = "Raw: " + movement;
+      debug += " D: " + device.name;
+      // TODO: find a better solution to detect different devices
+      if (device.name == "Touchscreen") // if (device.noisy) is false for touchscreen
+      {
+        float TouchInputSensitivity = 4f;
+
+        float temp = Mathf.Clamp(movement, -TouchInputSensitivity, TouchInputSensitivity);
+        temp = Mathf.Abs(temp);
+        temp = Mathf.Lerp(0f, 1f, temp / TouchInputSensitivity);
+        movement = temp * Mathf.Sign(movement);
+      }
+      inputDebugText.text = debug;
+
+      this.OnMovement(movement);
     }
 
     private void OnMovementInputCanceled(InputAction.CallbackContext context)

@@ -180,8 +180,8 @@
                     "id": "5bce0c1a-891b-4824-8edb-71611e253871",
                     "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
-                    "groups": "Touch;Keyboard&Mouse",
+                    "processors": "",
+                    "groups": "Touch",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
