@@ -7,15 +7,17 @@ using Lix.Core;
 namespace Lix.CubeRunner
 {
   [RequireComponent(typeof(PlayerInput))]
-  public class InputListener : MonoBehaviour, IInputListener
+  public class InputListener : DontDestroy, IInputListener
   {
 
     private PlayerInput playerInput;
     private InputAction ActionMove;
     private InputAction ActionPause;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
+
       playerInput = GetComponent<PlayerInput>();
 
       ActionMove = playerInput.currentActionMap.FindAction("Move");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Lix.Core
 {
+  // I don't use this class, but it's a good example of how to use the singleton pattern.
   public abstract class Singleton<T> : MonoBehaviour where T : Component
   {
     public bool DontDestroy = false;
@@ -12,7 +13,7 @@ namespace Lix.Core
     /// <summary>
     /// The instance.
     /// </summary>
-    private static T instance;
+    private T instance;
 
     #endregion
 
@@ -22,7 +23,7 @@ namespace Lix.Core
     /// Gets the instance.
     /// </summary>
     /// <value>The instance.</value>
-    public static T Instance
+    public T Instance
     {
       get
       {

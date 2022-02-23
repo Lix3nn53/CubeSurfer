@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Lix.Core
 {
@@ -17,6 +18,13 @@ namespace Lix.Core
     public static void Register(ServiceDescriptor serviceDescriptor)
     {
       IDictionary<Type, ServiceDescriptor> serviceDescriptors = GetServiceDescriptors();
+
+      if (serviceDescriptors.ContainsKey(serviceDescriptor.ServiceType))
+      {
+        // throw new Exception(string.Format("Service {0} is already registered", serviceDescriptor.ServiceType));
+        Debug.LogWarning(string.Format("Service {0} is already registered", serviceDescriptor.ServiceType));
+        return;
+      }
 
       serviceDescriptors[serviceDescriptor.ServiceType] = serviceDescriptor;
     }
