@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lix.Core;
 using Lix.CubeRunner;
 
 public class ContainerCore : DIContainerRegisterMono
 {
   [SerializeField] private InputListener inputListener;
 
-  public override void RegisterDependencies(DIContainer builder)
+  public override void RegisterDependencies(IDIContainer container)
   {
-    builder.Register(new ServiceDescriptor(inputListener, ServiceLifetime.Singleton));
+    container.Register(new ServiceDescriptor(inputListener, typeof(IInputListener), ServiceLifetime.Singleton));
   }
 }

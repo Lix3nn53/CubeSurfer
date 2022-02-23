@@ -4,8 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using Autofac;
-using Lix.IoC;
+using Lix.Core;
 
 namespace Lix.CubeRunner
 {
@@ -19,7 +18,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      IInputListener inputListener = DependencyResolver.Container.Resolve<IInputListener>();
+      IInputListener inputListener = DIContainer.Instance.GetService<IInputListener>();
 
       inputListener.GetAction(InputActionType.Move).performed += OnMovementInputPerformed;
     }

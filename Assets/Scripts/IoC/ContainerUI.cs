@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lix.Core;
 using Lix.CubeRunner;
 
 public class ContainerUI : DIContainerRegisterMono
 {
   [SerializeField] private PauseMenu pauseMenu;
 
-  public override void RegisterDependencies(DIContainer builder)
+  public override void RegisterDependencies(IDIContainer container)
   {
-    builder.Register(new ServiceDescriptor(pauseMenu, ServiceLifetime.Singleton));
+    container.Register(new ServiceDescriptor(pauseMenu, ServiceLifetime.Singleton));
   }
 }

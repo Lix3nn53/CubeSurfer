@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lix.Core;
-using Autofac;
 
 namespace Lix.CubeRunner
 {
