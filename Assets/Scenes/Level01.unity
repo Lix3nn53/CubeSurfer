@@ -3109,6 +3109,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DroppedCubeThrash: {fileID: 1117504673}
+--- !u!1 &1217753692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5674372954429623017, guid: ba2c1b320e2cb4b419ea160ee5f36632, type: 3}
+  m_PrefabInstance: {fileID: 5674372953188433590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1217753695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217753692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134b5b15facac1a47bfb924d440ef83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 0}
+  playerMovement: {fileID: 0}
+  trackManager: {fileID: 0}
 --- !u!1 &1269650665
 GameObject:
   m_ObjectHideFlags: 0

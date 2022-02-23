@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDIContainerRegister
 {
-  public void RegisterDependencies(DIContainerBuilder builder);
+  public void RegisterDependencies(DIContainer builder);
 }

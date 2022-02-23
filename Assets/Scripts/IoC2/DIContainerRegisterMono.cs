@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class DIContainerRegisterMono : MonoBehaviour, IDIContainerRegister
 {
-  public abstract void RegisterDependencies(DIContainerBuilder builder);
+  public abstract void RegisterDependencies(DIContainer builder);
 }

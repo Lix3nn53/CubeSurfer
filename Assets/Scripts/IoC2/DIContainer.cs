@@ -1,38 +1,39 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class DIContainer
+public interface DIContainer
 {
-  private IDictionary<Type, ServiceDescriptor> _serviceDescriptors = new Dictionary<Type, ServiceDescriptor>();
-
-  public DIContainer(List<ServiceDescriptor> serviceDescriptors)
+  public IDictionary<Type, ServiceDescriptor> getServiceDescriptors()
   {
-    foreach (var serviceDescriptor in serviceDescriptors)
-    {
-      _serviceDescriptors.Add(serviceDescriptor.ServiceType, serviceDescriptor);
-    }
+    throw new NotImplementedException();
+  }
+
+  public void Register(ServiceDescriptor serviceDescriptor)
+  {
+    IDictionary<Type, ServiceDescriptor> serviceDescriptors = getServiceDescriptors();
+
+    serviceDescriptors[serviceDescriptor.ServiceType] = serviceDescriptor;
   }
 
   public object GetService(Type serviceType)
   {
-    var decriptor = _serviceDescriptors[serviceType];
+    IDictionary<Type, ServiceDescriptor> serviceDescriptors = getServiceDescriptors();
+    var serviceDescriptor = serviceDescriptors[serviceType];
 
-    if (decriptor == null)
+    if (serviceDescriptor == null)
     {
       throw new Exception($"Service of type {serviceType.Name} is not registered");
     }
 
     // Return implementation if it is already created
-    if (decriptor.Implementation != null)
+    if (serviceDescriptor.Implementation != null)
     {
-      return decriptor.Implementation;
+      return serviceDescriptor.Implementation;
     }
 
     // Create implementation if it is not created yet
-    Type actualType = decriptor.ImplementationType ?? decriptor.ServiceType;
+    Type actualType = serviceDescriptor.ImplementationType ?? serviceDescriptor.ServiceType;
     if (actualType.IsAbstract || actualType.IsInterface)
     {
       throw new Exception($"Can't create instance of abstract or interface type {actualType.Name}");
@@ -45,9 +46,9 @@ public class DIContainer
     var implementation = Activator.CreateInstance(actualType, parameters); // constructorInfo.Invoke(parameters); 
 
     // Save implementation if it is singleton
-    if (decriptor.ServiceLifetime == ServiceLifetime.Singleton)
+    if (serviceDescriptor.ServiceLifetime == ServiceLifetime.Singleton)
     {
-      decriptor.Implementation = implementation;
+      serviceDescriptor.Implementation = implementation;
     }
 
     return implementation;
