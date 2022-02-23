@@ -8,8 +8,8 @@ public class ContainerUI : DIContainerRegisterMono
 {
   [SerializeField] private PauseMenu pauseMenu;
 
-  public override void RegisterDependencies(IDIContainer container)
+  public override void RegisterDependencies()
   {
-    container.Register(new ServiceDescriptor(pauseMenu, ServiceLifetime.Singleton));
+    DIContainer.Register(new ServiceDescriptor(pauseMenu, ServiceLifetime.Singleton));
   }
 }

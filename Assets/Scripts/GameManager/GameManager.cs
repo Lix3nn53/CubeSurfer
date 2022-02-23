@@ -12,7 +12,7 @@ namespace Lix.CubeRunner
     {
       ChangeState(new GameStatePlay());
 
-      IInputListener inputListener = DIContainer.Instance.GetService<IInputListener>();
+      IInputListener inputListener = DIContainer.GetService<IInputListener>();
 
       inputListener.GetAction(InputActionType.Pause).performed += OnPauseInputPerformed;
     }

@@ -6,9 +6,9 @@ namespace Lix.Core
   {
     private void Awake()
     {
-      RegisterDependencies(DIContainer.Instance);
+      RegisterDependencies();
     }
 
-    public abstract void RegisterDependencies(IDIContainer container);
+    public abstract void RegisterDependencies();
   }
 }

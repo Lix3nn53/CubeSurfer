@@ -11,7 +11,7 @@ namespace Lix.CubeRunner
 
     public GameStatePause()
     {
-      pauseMenu = DIContainer.Instance.GetService<PauseMenu>();
+      pauseMenu = DIContainer.GetService<PauseMenu>();
     }
 
     public void Enter()

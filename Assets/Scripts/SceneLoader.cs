@@ -18,7 +18,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      IInputListener inputListener = DIContainer.Instance.GetService<IInputListener>();
+      IInputListener inputListener = DIContainer.GetService<IInputListener>();
 
       inputListener.GetAction(InputActionType.Move).performed += OnMovementInputPerformed;
     }

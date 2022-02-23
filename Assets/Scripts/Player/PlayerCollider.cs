@@ -28,8 +28,8 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerMovement = DIContainer.Instance.GetService<PlayerMovement>();
-      trackManager = DIContainer.Instance.GetService<TrackManager>();
+      playerMovement = DIContainer.GetService<PlayerMovement>();
+      trackManager = DIContainer.GetService<TrackManager>();
     }
 
     public void OnCube(GameObject cube)

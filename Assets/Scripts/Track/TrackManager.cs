@@ -40,7 +40,7 @@ namespace Lix.CubeRunner
     private void Start()
     {
       // Init dependencies
-      playerMovement = DIContainer.Instance.GetService<PlayerMovement>();
+      playerMovement = DIContainer.GetService<PlayerMovement>();
 
       // Init prefabs
       this.segmentPrefabs = new TrackSegment[transform.childCount];

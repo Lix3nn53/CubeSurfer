@@ -24,9 +24,9 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DIContainer.Instance.GetService<PlayerCollider>();
-      playerMovement = DIContainer.Instance.GetService<PlayerMovement>();
-      trackManager = DIContainer.Instance.GetService<TrackManager>();
+      playerCollider = DIContainer.GetService<PlayerCollider>();
+      playerMovement = DIContainer.GetService<PlayerMovement>();
+      trackManager = DIContainer.GetService<TrackManager>();
 
       RandomShape();
       // AutoFillLineData(); // Random Shape already fills the data

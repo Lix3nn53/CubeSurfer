@@ -8,8 +8,8 @@ public class ContainerCore : DIContainerRegisterMono
 {
   [SerializeField] private InputListener inputListener;
 
-  public override void RegisterDependencies(IDIContainer container)
+  public override void RegisterDependencies()
   {
-    container.Register(new ServiceDescriptor(inputListener, typeof(IInputListener), ServiceLifetime.Singleton));
+    DIContainer.Register(new ServiceDescriptor(inputListener, typeof(IInputListener), ServiceLifetime.Singleton));
   }
 }

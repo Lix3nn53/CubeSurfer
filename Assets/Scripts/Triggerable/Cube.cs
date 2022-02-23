@@ -11,7 +11,7 @@ namespace Lix.CubeRunner
 
     private void Start()
     {
-      playerCollider = DIContainer.Instance.GetService<PlayerCollider>();
+      playerCollider = DIContainer.GetService<PlayerCollider>();
     }
 
     public override void OnTrigger(Collider other)
